@@ -14,7 +14,7 @@ const ImageSlider = ({data}:{data:any}) => {
             }else{
                 setCurrentIndex(currenIndex => currenIndex + 1);
             }
-            console.log('counting', currenIndex);
+            // console.log('counting', currenIndex);
         }, 4000);
         return () => clearInterval(interval);
       }, [currenIndex]);
@@ -34,7 +34,7 @@ const ImageSlider = ({data}:{data:any}) => {
                     <div className="flex items-center justify-center mb-5 rounded-2xl bg-slate-900/60 transition-all">
                         {
                             data.map((d:any, index:number)=>(
-                                <div className="text-slate-50 text-3xl cursor-pointer transition-all" onClick={()=>setCurrentIndex(index)}>
+                                <div key={d.id} className="text-slate-50 text-3xl cursor-pointer transition-all" onClick={()=>setCurrentIndex(index)}>
                                     <RxDotFilled className={`transition-all ${currenIndex === index ? 'text-brand-3' :  null}`}/>
                                 </div>
                             ))

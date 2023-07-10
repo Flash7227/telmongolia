@@ -1,4 +1,4 @@
-import { getCaraosel } from '../../api/rest'
+import { getCaraosel } from '../api/rest'
 import ImageSlider from './imageSlider';
 
 const Caraosel = async () => {

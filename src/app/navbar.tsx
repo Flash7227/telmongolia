@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
-import { BiUser } from "react-icons/bi";
 import { BsChevronDown } from "react-icons/bs";
-import Motto from "@/components/ui/motto";
+import Motto from "@/components/motto";
+import Login from "@/components/login";
 
 //[0] => Name, [1] => URL
 const personal = [
@@ -30,6 +30,14 @@ const corporate = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const handleOpen=()=>{
+    setIsOpen(true);
+    document.body.style.overflow = "hidden";
+  }
+  const handleClose=()=>{
+    setIsOpen(false);
+    document.body.style.overflow = "auto";
+  }
   return (
     <div>
       <header className="relative border-b border-brand-1/20 z-50">
@@ -98,24 +106,21 @@ const Navbar = () => {
               {/* <Link href="/help" className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">Бидний тухай</Link> */}
             </ul>
           </div>
-          <div className="hidden md:flex">
-            <button className="flex items-center gap-1 text-slate-950 py-1 px-2">
-              <BiUser />
-              Нэвтрэх
-            </button>
+          <div className="hidden md:flex h-full text-slate-950 tracking-tight">
+            <Login />
           </div>
           {/* DESKTOP MENU ENDS */}
           {/* START OF MOBILE MENU */}
           <div className="block md:hidden">
             <button
               className="text-slate-950 text-xl"
-              onClick={() => setIsOpen(true)}
+              onClick={() => handleOpen()}
             >
               <AiOutlineMenu />
             </button>
             <div
               className={`${isOpen ? "fixed" : "scale-0"}`}
-              onClick={() => setIsOpen(false)}
+              onClick={() => handleClose()}
             >
               <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
               <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -127,7 +132,7 @@ const Navbar = () => {
                 >
                   <button
                     className="text-slate-950 text-xl"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleClose()}
                   >
                     <AiOutlineClose />
                   </button>
