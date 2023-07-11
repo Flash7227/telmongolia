@@ -26,6 +26,7 @@ export async function login({user_id, user_pass, user_pass_login}:{user_id:strin
     }
     try{
         const res = await fetch(url, requestOptions);
+        await new Promise((resolve)=> setTimeout(resolve, 2000))
         const data = await res.json();
         return data;
     }catch(err){

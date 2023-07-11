@@ -4,6 +4,7 @@ import { Montserrat } from 'next/font/google'
 import Navbar from './navbar'
 import Topbar from './topbar'
 import Footer from './footer'
+import { Toaster } from "@/components/ui/toaster"
 
 const font = Montserrat({ subsets: ['cyrillic'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   )
