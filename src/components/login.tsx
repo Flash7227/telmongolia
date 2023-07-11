@@ -31,6 +31,7 @@ import { useToast } from "@/components/ui/use-toast";
 import AuthCheck from "./authCheck";
 import Link from "next/link";
 import Loader from "./ui/loader";
+import Onetime from "./onetime";
 
 import { useState, useEffect } from "react";
 
@@ -48,6 +49,7 @@ const formSchema = z.object({
 const Login = () => {
   const { toast } = useToast();
   const [auth, setAuth]  = useState();
+  const [onetime, setOnetime] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(()=>{
     const temp = AuthCheck();
@@ -79,6 +81,9 @@ const Login = () => {
       });
       setAuth(res);
       // window.location.href = "/selfcare";
+    }else if(res["message"].includes("Нэг удаа")){
+      console.log('triggering one time');
+      setOnetime(true);
     }
     console.log(res, "report is here");
     // console.log(values);
@@ -91,6 +96,7 @@ const Login = () => {
   }
   return (
     <div>
+      {onetime && <Onetime user_id={form.getValues("user_id")}/>}
        {auth ? (
             <div className="h-full flex group cursor-pointer items-center gap-1 relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
               <BiUser className="text-lg text-brand-1" />

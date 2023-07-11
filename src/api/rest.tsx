@@ -26,11 +26,28 @@ export async function login({user_id, user_pass, user_pass_login}:{user_id:strin
     }
     try{
         const res = await fetch(url, requestOptions);
-        await new Promise((resolve)=> setTimeout(resolve, 2000))
+        await new Promise((resolve)=> setTimeout(resolve, 1000))
         const data = await res.json();
         return data;
     }catch(err){
         console.log('There was an error', err);
     }
-    
+}
+export async function onetime({user_id, onetime, password}:{user_id:string, onetime:string, password:string}){
+    const values = {user_id, onetime, password};
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/login/onetime";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
 }
