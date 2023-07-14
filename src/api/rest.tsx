@@ -1,4 +1,7 @@
 var baseurl = process.env.BASEURL;
+import Cookies from 'universal-cookie';
+import { object } from 'zod';
+
 
 export async function getCaraosel() {
     try{
@@ -8,9 +11,8 @@ export async function getCaraosel() {
     }catch(err){
         console.log('There was an error', err);
     }
-    
 }
-export async function login({user_id, user_pass, user_pass_login}:{user_id:string, user_pass:string, user_pass_login:boolean}) {
+export async function login({user_id, user_pass, user_pass_login}:{user_id:string, user_pass:any, user_pass_login:boolean}) {
     const values = {user_id, user_pass, user_pass_login};
     const requestOptions = {
         method: "POST",
@@ -26,7 +28,7 @@ export async function login({user_id, user_pass, user_pass_login}:{user_id:strin
     }
     try{
         const res = await fetch(url, requestOptions);
-        await new Promise((resolve)=> setTimeout(resolve, 1000))
+        // await new Promise((resolve)=> setTimeout(resolve, 1000)) //for testing
         const data = await res.json();
         return data;
     }catch(err){
@@ -45,6 +47,68 @@ export async function onetime({user_id, onetime, password}:{user_id:string, onet
     let url = baseurl + "/api/1/login/onetime";
     try{
         const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export function getCookie(){
+    const cookies = new Cookies();
+    const temp = cookies.get('user');
+    if(temp){
+        return temp;
+    }
+    return null;
+}
+export async function setInfo(obj:any, cust_id:number, type:string){
+    Object.keys(obj).forEach(key => {
+        if (key !== type) {
+            delete obj[key];
+        }
+    });
+    obj['cust_id'] = cust_id;
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+    };
+    let url = baseurl + "/api/1/cust/" + type;
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getUserInfo =  async ({userId, token}:{userId:string, token:string}) =>  {
+    const values = {
+        user_id: userId,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/user/info";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getNews = async (page:number) => {
+    const url = baseurl + '/api/2/news?type=news&customer=resident&page=' + page;
+    try{
+        const res = await fetch(url);
         const data = await res.json();
         return data;
     }catch(err){

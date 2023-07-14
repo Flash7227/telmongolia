@@ -11,20 +11,20 @@ import Login from "@/components/login";
 
 //[0] => Name, [1] => URL
 const personal = [
-  ["Суурин утас", "single"],
-  ["Хосолсон багц", "double"],
-  ["Гуравласан багц", "triple"],
-  ["National КаТВ", "catv"],
-  ["TVROOM", "iptv"],
-  ["MIP70", "sip"],
+  ["Суурин утас", "/products/single"],
+  ["Хосолсон багц", "/products/double"],
+  ["Гуравласан багц", "/products/triple"],
+  ["National КаТВ", "/products/catv"],
+  ["TVROOM", "/products/iptv"],
+  ["MIP70", "/products/sip"],
 ];
 const corporate = [
-  ["Суурин утас", "single"],
-  ["Хосолсон багц", "double"],
-  ["National КаТВ", "catv"],
-  ["TVROOM", "iptv"],
-  ["Call Center", "callcenter"],
-  ["Бодит хурдны интернет", "dedicated"],
+  ["Суурин утас", "/products/corporate/single"],
+  ["Хосолсон багц", "/products/corporate/double"],
+  ["National КаТВ", "/products/corporate/catv"],
+  ["TVROOM", "/products/corporate/iptv"],
+  ["Call Center", "/products/corporate/callcenter"],
+  ["Бодит хурдны интернет", "/products/corporate/dedicated"],
 ];
 
 const Navbar = () => {
@@ -130,18 +130,42 @@ const Navbar = () => {
                   }`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <button
-                    className="text-slate-950 text-xl"
-                    onClick={() => handleClose()}
-                  >
-                    <AiOutlineClose />
-                  </button>
-                  <ul>
-                    <li>Өрхийн хэрэглэгч</li>
-                    <li>Байгууллага</li>
-                    <li>Урамшуулал</li>
-                    <li>Мэдээлэл</li>
-                    <li>Тусламж</li>
+                  <div className="text-right mr-6 mt-4">
+                    <button
+                      className="text-slate-950 text-2xl"
+                      onClick={() => handleClose()}
+                    >
+                      <AiOutlineClose />
+                    </button>
+                  </div>
+             
+                  <ul className="ml-8 text-[18px] flex flex-col gap-2">
+                    <li>Өрхийн хэрэглэгч
+                      <ul className="ml-10 text-base">
+                        {personal.map((product) => (
+                          <DropdownItem
+                            name={product[0]}
+                            url={product[1]}
+                            key={product[0]}
+                          />
+                        ))}
+                        </ul>
+                    </li>
+                    <li>Байгууллага
+                      <ul className="ml-10 text-base">
+                      {corporate.map((product) => (
+                        <DropdownItem
+                          name={product[0]}
+                          url={product[1]}
+                          key={product[0]}
+                        />
+                      ))}
+                      </ul>
+                    </li>
+                    <Link href="/bonus" className="hover:text-brand-2">Урамшуулал</Link>
+                    <Link href="/news" className="hover:text-brand-2">Мэдээлэл</Link>
+                    <Link href="/help" className="hover:text-brand-2">Тусламж</Link>
+                    <Login />
                   </ul>
                 </div>
               </div>
@@ -156,7 +180,7 @@ const Navbar = () => {
 const DropdownItem = ({ name, url }: { name: string; url: any }) => {
   return (
     <Link href={url}>
-      <li className="py-2 hover:translate-x-4 hover:list-disc hover:text-brand-2 transition-transform">
+      <li className="pt-1 md:py-2 hover:translate-x-4 hover:list-disc hover:text-brand-2 transition-transform">
         {name}
       </li>
     </Link>

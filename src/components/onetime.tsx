@@ -33,10 +33,10 @@ const formSchema = z.object({
   user_id: z.string()
 });
 
-const Onetime = ({user_id}:{user_id:string}) => {
+const Onetime = ({user_id, handleOpenOnetimeChange}:{user_id:string, handleOpenOnetimeChange:any}) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(()=>{
     setOpen(true);
@@ -58,9 +58,16 @@ const Onetime = ({user_id}:{user_id:string}) => {
       title: "Login",
       description: res["message"],
     });
+    if (res["result"] === "ok") {
+      handleOpenChange();
+    }
+  }
+  const handleOpenChange = () => {
+    handleOpenOnetimeChange(false);
+    setOpen(false);
   }
   return (
-    <Dialog defaultOpen={open}>
+    <Dialog open={open} onOpenChange={()=>handleOpenChange()}>
       <DialogContent className="sm:max-w-[525px]">
         {loading && <Loader />}
         <DialogHeader>

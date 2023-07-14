@@ -21,7 +21,7 @@ const ImageSlider = ({data}:{data:any}) => {
       
     return (
         <div>
-            <div className='max-h-[400px] 2xl:h-[400px] min-h-[220px] w-full relative rounded-3xl overflow-hidden'>
+            <div className='2xl:h-[400px] min-h-[220px] w-full relative rounded-3xl overflow-hidden'>
                 {
                     data.map((d:any, index:number)=>(
                         <div className='h-full w-full absolute transition-all' key={d.id}>

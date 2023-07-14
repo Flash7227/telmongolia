@@ -5,11 +5,11 @@ const Topbar = () => {
         <div className="hidden md:block bg-gradient-to-r from-[#135EA5] from-10% to-[#00AFEF] to-100%">
             <div className="container text-slate-50 flex justify-between items-center tracking-tight">
                 <ul className="flex gap-4 text-xs py-2">
-                    <Link href="/">MTC Service</Link>
-                    <Link href="/">MTC Acadamy</Link>
-                    <Link href="/">Data center</Link>
-                    <Link href="/">TVROOM</Link>
-                    <Link href="/">Үндэсний лавлах 1109</Link>
+                    <Link href="https://www.facebook.com/profile.php?id=100058955362068" target="_blank" rel="noreferrer">MTC Service</Link>
+                    <Link href="https://www.facebook.com/profile.php?id=100058955362068" target="_blank" rel="noreferrer">MTC Acadamy</Link>
+                    <Link href="https://servers.mn/" target="_blank" rel="noreferrer">Data center</Link>
+                    <Link href="https://tvroom.mn/" target="_blank" rel="noreferrer">TVROOM</Link>
+                    <Link href="https://www.facebook.com/1109.mn" target="_blank" rel="noreferrer">Үндэсний лавлах 1109</Link>
                 </ul>
                 <ul className="text-lg">
                     <li>
