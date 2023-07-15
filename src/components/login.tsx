@@ -50,10 +50,10 @@ const Login = () => {
   const [onetime, setOnetime] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log('bnu2');
+  // console.log('bnu2');
   useEffect(() => {
     const temp = getCookie();
-    console.log(temp, 'triggierin auth in here  right  now');
+    // console.log(temp, 'triggierin auth in here  right  now');
     setAuth(temp);
   }, []);
 
@@ -106,10 +106,10 @@ const Login = () => {
         />
       )}
       {auth ? (
-        <div className="h-full flex group cursor-pointer items-center gap-1 font-medium text-brand-1 relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
+        <div className="h-full flex group cursor-pointer items-center gap-1 font-medium text-brand-1 relative after:absolute after:content-[''] md:after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
           <BiUser className="text-lg text-brand-1" />
           {auth["data"]["userId"]}
-          <ul className="absolute top-full right-0 bg-slate-50 text-slate-950 rounded-2xl shadow-md py-4 px-8 -ml-8 w-52 text-sm font-normal hidden group-hover:block">
+          <ul className="absolute top-full md:right-0 bg-slate-50 text-slate-950 rounded-2xl shadow-md py-4 px-8 -ml-8 w-52 text-sm font-normal hidden group-hover:block">
             <Link href="/user">
               <li className="py-2 hover:translate-x-4 hover:list-disc hover:text-brand-2 transition-transform">
                 Хэрэглэгчийн булан

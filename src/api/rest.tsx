@@ -105,8 +105,8 @@ export const getUserInfo =  async ({userId, token}:{userId:string, token:string}
         console.log('There was an error', err);
     }
 }
-export const getNews = async (page:number) => {
-    const url = baseurl + '/api/2/news?type=news&customer=resident&page=' + page;
+export const getNews = async (type:string, page:number) => {
+    const url = baseurl + '/api/2/news?type=' + type + '&customer=resident&page=' + page;
     try{
         const res = await fetch(url);
         const data = await res.json();

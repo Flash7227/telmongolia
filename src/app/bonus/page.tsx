@@ -9,7 +9,7 @@ import Paginator from "@/components/ui/paginator";
 import Loader from "@/components/ui/loader";
 import { BsFolder2Open } from "react-icons/bs";
 
-const breadcrumb = ["Мэдээлэл"];
+const breadcrumb = ["Урамшуулал"];
 
 const Page = () => {
   interface NewsType {
@@ -23,7 +23,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const getData = async (page: number) => {
     setLoading(true);
-    const res = await getNews('news', page);
+    const res = await getNews('bonus', page);
     setNews(res);
     setLoading(false);
   };
@@ -39,7 +39,7 @@ const Page = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-self-center items-stretch gap-6">
             {news["data"].map((d) => (
               <Link
-                href={"/news/" + d["id"]}
+                href={"/bonus/" + d["id"]}
                 key={d["id"]}
                 className="w-[356px] border border-gray-300 mx-auto rounded-2xl overflow-hidden relative group"
               >

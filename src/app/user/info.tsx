@@ -28,7 +28,7 @@ const Info = ({ userId, token }: { userId: string; token: string }) => {
     <div className="border border-slate-50 p-2 rounded-2xl shadow-sm shadow-brand-1/30 w-[400px]">
       {userInfo && (
         <div>
-          <h1 className="flex items-center justify-center gap-2 text-3xl text-brand-1 font-medium">
+          <h1 className="flex items-center justify-center gap-2 text-3xl text-brand-1 font-medium my-4">
             <BiSolidUserCircle />
             {userInfo["data"]["name"]}
           </h1>

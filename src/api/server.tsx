@@ -52,3 +52,14 @@ export const getUserUsage =  async ({userId, token}:{userId:string, token:string
         console.log('There was an error', err);
     }
 }
+export const getEachNews = async (id:number, type:string) => {
+    const url = baseurl + '/api/2/' + type + '?id=' + id;
+    console.log(url, 'url is here');
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
