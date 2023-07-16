@@ -48,6 +48,7 @@ const Navbar = () => {
               fill
               alt="logo"
               className="object-contain py-1"
+              sizes="(max-width: 300px) 40vw"
             />
           </Link>
           <div className="h-full flex gap-6">

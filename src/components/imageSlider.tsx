@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { RxDot, RxDotFilled } from "react-icons/rx";
+import Link from "next/link";
 
 
 const ImageSlider = ({data}:{data:any}) => {
@@ -40,6 +41,13 @@ const ImageSlider = ({data}:{data:any}) => {
                             ))
                         }
                     </div>
+                </div>
+                <div className="absolute bottom-8 left-4">
+                    <ul className="text-slate-50 text-xs flex gap-2 items-center">
+                        <li>Trending: </li>
+                        <Link href="/order" className="border p-2 rounded-2xl hover:bg-brand-3 hover:border-brand-3 transition-colors">Шинэ хэрэглэгч болох</Link>
+                        <Link href="/aboutus" className="border p-2 rounded-2xl hover:bg-brand-3 hover:border-brand-3 transition-colors">Бидний тухай</Link>
+                    </ul>
                 </div>
             </div>
         </div>
