@@ -14,7 +14,7 @@ const Comment = ({comments}:{comments: (string)[]}) => {
                     <div className="border border-slate-400/30 shadow-sm rounded-full p-6 text-base bg-white max-w-[500px] tracking-tight text-left">
                         <div className="flex text-yellow-500 mb-2 text-lg">
                             {Array.from({length: 5}, (x, i) => (
-                                <HiStar/>
+                                <HiStar key={i}/>
                             ))}
                         </div>
                         {c}

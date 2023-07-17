@@ -7,6 +7,7 @@ import Footer from './footer'
 import { Toaster } from "@/components/ui/toaster"
 import Feedback from '@/components/feedback'
 
+
 const font = Montserrat({ subsets: ['cyrillic'] })
 
 export const metadata: Metadata = {

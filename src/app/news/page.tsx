@@ -43,7 +43,7 @@ const Page = () => {
                 key={d["id"]}
                 className="w-[356px] border border-gray-300 mx-auto rounded-2xl overflow-hidden relative group"
               >
-                <div className="absolute inset-0 bg-brand-2/70 h-full z-10 flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-0 bg-brand-2/70 h-full z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="text-white border-double border-2 border-slate-50 p-4 rounded-2xl font-semibold flex gap-1 items-center">
                     <BsFolder2Open className="text-2xl"/>Дэлгэрэнгүй
                   </span>

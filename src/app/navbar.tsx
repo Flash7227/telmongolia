@@ -8,6 +8,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import Motto from "@/components/motto";
 import Login from "@/components/login";
+import NextNProgress from 'nextjs-progressbar';
 
 //[0] => Name, [1] => URL
 const personal = [
@@ -174,7 +175,8 @@ const Navbar = () => {
           </div>
         </nav>
       </header>
-      {pathname === "/" && <Motto />}
+      {/* {pathname === "/" && <Motto />} */}
+      <NextNProgress />
     </div>
   );
 };

@@ -22,7 +22,7 @@ const ImageSlider = ({data}:{data:any}) => {
       
     return (
         <div>
-            <div className='2xl:h-[400px] min-h-[220px] w-full relative rounded-3xl overflow-hidden'>
+            <div className='2xl:h-[460px] min-h-[220px] w-full relative rounded-3xl overflow-hidden'>
                 {
                     data.map((d:any, index:number)=>(
                         <div className='h-full w-full absolute transition-all' key={d.id}>
@@ -42,7 +42,7 @@ const ImageSlider = ({data}:{data:any}) => {
                         }
                     </div>
                 </div>
-                <div className="absolute bottom-8 left-4">
+                <div className="hidden md:block absolute bottom-8 left-4">
                     <ul className="text-slate-50 text-xs flex gap-2 items-center">
                         <li>Trending: </li>
                         <Link href="/order" className="border p-2 rounded-2xl hover:bg-brand-3 hover:border-brand-3 transition-colors">Шинэ хэрэглэгч болох</Link>
