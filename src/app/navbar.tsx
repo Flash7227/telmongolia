@@ -6,9 +6,7 @@ import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
-import Motto from "@/components/motto";
 import Login from "@/components/login";
-import NextNProgress from 'nextjs-progressbar';
 
 //[0] => Name, [1] => URL
 const personal = [
@@ -41,11 +39,11 @@ const Navbar = () => {
   }
   return (
     <div>
-      <header className="relative border-b border-brand-1/20 z-50">
-        <nav className="container h-20 text-slate-950 font-normal tracking-tight flex items-center justify-between text-[14px]">
+      <header className="relative border-b border-slate-50/20 z-50 bg-gradient-to-r from-[#135EA5] from-10% to-[#00AFEF] to-100%">
+        <nav className="container h-20 text-slate-50 font-medium tracking-tight flex items-center justify-between text-[14px]">
           <Link href="/" className="relative h-full w-32">
             <Image
-              src="/assets/images/logo.png"
+              src="/assets/images/logo_white.png"
               fill
               alt="logo"
               className="object-contain py-1"
@@ -57,7 +55,7 @@ const Navbar = () => {
                         <Image src="/assets/images/logo.png" fill alt="logo" className="object-contain py-2"/>
                     </Link> */}
             <ul className="hidden md:flex gap-4 items-center h-full">
-              <li className="group h-full flex items-center cursor-pointer relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
+              <li className="group h-full flex items-center cursor-pointer relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
                 <span className="flex items-center gap-1 flex-nowrap">
                   Өрхийн хэрэглэгч
                   <BsChevronDown className="text-sm" />
@@ -72,7 +70,7 @@ const Navbar = () => {
                   ))}
                 </ul>
               </li>
-              <li className="group h-full flex items-center cursor-pointer relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
+              <li className="group h-full flex items-center cursor-pointer relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
                 <span className="flex items-center gap-1">
                   Байгууллага
                   <BsChevronDown className="text-sm" />
@@ -89,33 +87,33 @@ const Navbar = () => {
               </li>
               <Link
                 href="/bonus"
-                className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
+                className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
               >
                 Урамшуулал
               </Link>
               <Link
                 href="/news"
-                className="h-full flex items-center  relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
+                className="h-full flex items-center  relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
               >
                 Мэдээлэл
               </Link>
               <Link
                 href="/help"
-                className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
+                className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all"
               >
                 Тусламж
               </Link>
               {/* <Link href="/help" className="h-full flex items-center relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">Бидний тухай</Link> */}
             </ul>
           </div>
-          <div className="hidden md:flex h-full text-slate-950 tracking-tight">
+          <div className="hidden md:flex h-full text-slate-50 tracking-tight">
             <Login />
           </div>
           {/* DESKTOP MENU ENDS */}
           {/* START OF MOBILE MENU */}
           <div className="block md:hidden">
             <button
-              className="text-slate-950 text-xl"
+              className="text-slate-50 text-xl"
               onClick={() => handleOpen()}
             >
               <AiOutlineMenu />
@@ -175,8 +173,6 @@ const Navbar = () => {
           </div>
         </nav>
       </header>
-      {/* {pathname === "/" && <Motto />} */}
-      <NextNProgress />
     </div>
   );
 };

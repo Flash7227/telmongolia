@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={`${font.className} flex flex-col min-h-screen`}>
         <Topbar />
         <Navbar />
-        <main className='container grow'>
+        <main className='grow'>
           {children}
         </main>
         <Feedback />

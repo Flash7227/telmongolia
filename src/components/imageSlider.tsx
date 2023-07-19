@@ -21,8 +21,8 @@ const ImageSlider = ({data}:{data:any}) => {
       }, [currenIndex]);
       
     return (
-        <div>
-            <div className='2xl:h-[460px] min-h-[220px] w-full relative rounded-3xl overflow-hidden'>
+        <div className="rounded-2xl overflow-hidden">
+            <div className='2xl:h-[250px] min-h-[220px] w-full relative'>
                 {
                     data.map((d:any, index:number)=>(
                         <div className='h-full w-full absolute transition-all' key={d.id}>
@@ -32,23 +32,27 @@ const ImageSlider = ({data}:{data:any}) => {
                     ))
                 }
                 <div className="absolute flex items-center justify-center bottom-0 left-0 right-0 ">
-                    <div className="flex items-center justify-center mb-5 rounded-2xl bg-slate-900/60 transition-all">
+                    <div className="flex items-center justify-center mb-5 rounded-3xl bg-slate-900/60 transition-all">
                         {
                             data.map((d:any, index:number)=>(
-                                <div key={d.id} className="text-slate-50 text-3xl cursor-pointer transition-all" onClick={()=>setCurrentIndex(index)}>
+                                <div key={d.id} className="text-slate-50 text-4xl cursor-pointer transition-all" onClick={()=>setCurrentIndex(index)}>
                                     <RxDotFilled className={`transition-all ${currenIndex === index ? 'text-brand-3' :  null}`}/>
                                 </div>
                             ))
                         }
                     </div>
                 </div>
-                <div className="hidden md:block absolute bottom-8 left-4">
-                    <ul className="text-slate-50 text-xs flex gap-2 items-center">
+                <div className="hidden md:block absolute top-8 left-8">
+                    <ul className="text-slate-50 text-xs flex gap-2 items-center font-medium">
                         <li>Trending: </li>
                         <Link href="/order" className="border p-2 rounded-2xl hover:bg-brand-3 hover:border-brand-3 transition-colors">Шинэ хэрэглэгч болох</Link>
                         <Link href="/aboutus" className="border p-2 rounded-2xl hover:bg-brand-3 hover:border-brand-3 transition-colors">Бидний тухай</Link>
                     </ul>
                 </div>
+                
+            </div>
+            <div className="bg-brand-2 text-slate-50 text-center font-semibold py-1 text-sm">
+                <h5>Харилцаа бүрийг холбоно.</h5>
             </div>
         </div>
     );

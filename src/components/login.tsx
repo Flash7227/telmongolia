@@ -106,8 +106,8 @@ const Login = () => {
         />
       )}
       {auth ? (
-        <div className="h-full flex group cursor-pointer items-center gap-1 font-medium text-brand-1 relative after:absolute after:content-[''] md:after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
-          <BiUser className="text-lg text-brand-1" />
+        <div className="h-full flex group cursor-pointer text-slate-50 items-center gap-1 font-medium relative after:absolute after:content-[''] md:after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
+          <BiUser className="text-lg" />
           {auth["data"]["userId"]}
           <ul className="absolute top-full md:right-0 bg-slate-50 text-slate-950 rounded-2xl shadow-md py-4 px-8 -ml-8 w-52 text-sm font-normal hidden group-hover:block">
             <Link href="/user">
@@ -125,8 +125,8 @@ const Login = () => {
         </div>
       ) : (
         <Dialog>
-          <DialogTrigger className="h-full flex items-center gap-1 relative after:absolute after:content-[''] after:border-b-4 after:border-brand-2 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
-            <BiUser className="text-lg text-brand-1" />
+          <DialogTrigger className="h-full flex items-center gap-1 font-medium text-slate-50 relative after:absolute after:content-[''] after:border-b-4 after:border-brand-3 after:top-full after:w-full after:-mt-2 after:scale-x-0 hover:after:scale-x-100 after:transition-all">
+            <BiUser className="text-lg" />
             Нэвтрэх
           </DialogTrigger>
           <DialogContent className="sm:max-w-[525px]">
