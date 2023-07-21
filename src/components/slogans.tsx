@@ -1,21 +1,35 @@
+"use client"
 import Image from "next/image";
-import Shortcut from "@/components/shortcut";
+import { useState, useEffect } from "react";
+const niceWords = ['Найдвартай байдал', 'Шуурхай үйлчилгээ', 'Найрсаг хамт олон', 'Хямд үнэ', 'Мэргэжилийн үйлчилгээ'];
+
 const Slogans = () => {
+    const [currenIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if(currenIndex === niceWords.length - 1){
+                setCurrentIndex(0);
+            }else{
+                setCurrentIndex(currenIndex => currenIndex + 1);
+            }
+            // console.log('counting', currenIndex);
+        }, 3000);
+        return () => clearInterval(interval);
+      }, [currenIndex]);
     return (
-        <div className="relative bg-transparent min-h-[220px] text-center bg-gradient-to-r from-[#135EA5] from-10% to-[#00AFEF] to-100% font-bold  tracking-tight w-full">
+        <div className="relative bg-transparent min-h-[140px] 2xl:min-h-[190px] text-center bg-gradient-to-r from-[#135EA5] from-10% to-[#00AFEF] to-100% font-bold  tracking-tight w-full">
         
-            <div className="relative h-full w-full z-20 py-10">
-                {/* <h1 className=" text-slate-50 text-2xl mb-4 max-w-[400px] mx-auto">Харилцаа бүрийг холбоно.</h1> */}
-                <p className="text-base text-slate-200/80">Бид танд</p>
-                <h5 className="text-slate-50 text-5xl">Хамгийн найдвартай</h5>
-                <p className="text-4xl uppercase text-sky-400 font-bold mt-2">Суурин утас</p>
+            <div className="relative h-full w-full z-20 py-2 2xl:py-8">
+                <p className="text-base text-slate-200/80">Бид таны</p>
+                <h5 className="text-slate-50 text-4xl">Харилцаа бүрийг холбоно.</h5>
+                {/* <h5 className="text-slate-50 text-3xl">Харилцаа бүрийг холбоно.</h5> */}
+                <div className="relative h-[46px]">
+                    {niceWords.map((word, index:number)=>(
+                        <p key={index} className={`text-2xl absolute w-full uppercase text-sky-400 font-bold mt-2 transition-transform duration-500 scale-0 ${index === currenIndex ? 'scale-100': 'scale-0'}`}>{word}</p>
+                    ))}
                     
-        {/* <div className="flex justify-center gap-4 md:gap-8 2xl:gap-10 flex-wrap items-center">
-          <Shortcut title="Төлбөр" desc="Төлөх" icon="payment.png" />
-          <Shortcut title="Карт" desc="Авах" icon="card.png"/>
-          <Shortcut title="Захиалга" desc="Өгөх" icon="order.png"/>
-          <Shortcut title="Дугаар" desc="Захиалах" icon="number.png"/>
-        </div> */}
+                </div>
             </div>
             <div className="absolute w-full bottom-[-1px] z-0">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">

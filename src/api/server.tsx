@@ -63,3 +63,14 @@ export const getEachNews = async (id:number, type:string) => {
         console.log('There was an error', err);
     }
 }
+export const getEachNewsShareholders = async (id:number) => {
+    const url = baseurl + '/api/2/shareholders?id=' + id;
+    console.log(url, 'url is here');
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

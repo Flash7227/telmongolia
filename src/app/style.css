@@ -1,0 +1,18 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.table td, .table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.aboutus-timeline h5{
+    @apply font-semibold
+}
+.aboutus-timeline ul{
+    @apply ml-4
+}
+.aboutus-timeline div{
+    @apply mt-4;
+}

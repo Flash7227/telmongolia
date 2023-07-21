@@ -115,3 +115,33 @@ export const getNews = async (type:string, page:number) => {
         console.log('There was an error', err);
     }
 }
+export const getWorkPlace = async () => {
+    const url = baseurl + '/api/2/workplace';
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getShareHolders = async () => {
+    const url = baseurl + '/api/2/shareholders?limit=1&page=1';
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getShareHoldersNews = async (type:string, page:number) => {
+    const url = baseurl + '/api/2/' + type + '?limit=6&page=' + page;
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

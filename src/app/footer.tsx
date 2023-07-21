@@ -16,7 +16,7 @@ const Footer = () => {
                     <Link href="/company" className="md:border-r border-slate-50 pr-2">
                         <li>Компанийн засаглал</li>
                     </Link>
-                    <Link href="/branches" className="md:border-r border-slate-50 pr-2">
+                    <Link href="/locations" className="md:border-r border-slate-50 pr-2">
                         <li>Салбарын байршил</li>
                     </Link>
                     <Link href="/hr" className="md:border-r border-slate-50 pr-2">

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Feedback = () => {
     return (
-        <div className="hidden absolute top-1/2 right-0 mr-4 lg:flex flex-col z-40">
+        <div className="hidden fixed top-1/2 right-0 mr-4 lg:flex flex-col z-40">
             <ul className="text-[30px] 2xl:text-[36px] flex flex-col gap-1 -mt-12 bg-slate-100 rounded-2xl p-2">
                 <Link href="https://www.facebook.com/TelecomMongoliaCompany/"
                     target="_blank"

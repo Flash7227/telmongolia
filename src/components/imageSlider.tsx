@@ -22,7 +22,7 @@ const ImageSlider = ({data}:{data:any}) => {
       
     return (
         <div className="rounded-2xl overflow-hidden">
-            <div className='2xl:h-[250px] min-h-[220px] w-full relative'>
+            <div className='2xl:h-[250px] min-h-[200px] w-full relative'>
                 {
                     data.map((d:any, index:number)=>(
                         <div className='h-full w-full absolute transition-all' key={d.id}>
@@ -51,9 +51,9 @@ const ImageSlider = ({data}:{data:any}) => {
                 </div>
                 
             </div>
-            <div className="bg-brand-2 text-slate-50 text-center font-semibold py-1 text-sm">
+            {/* <div className="bg-brand-2 text-slate-50 text-center font-semibold py-1 text-sm">
                 <h5>Харилцаа бүрийг холбоно.</h5>
-            </div>
+            </div> */}
         </div>
     );
 }
