@@ -13,7 +13,7 @@ const Footer = () => {
                     <Link href="/shareholders" className="md:border-r border-slate-50 pr-2">
                         <li>Хувьцаа эзэмшигчдэд</li>
                     </Link>
-                    <Link href="/company" className="md:border-r border-slate-50 pr-2">
+                    <Link href="/company/construct" className="md:border-r border-slate-50 pr-2">
                         <li>Компанийн засаглал</li>
                     </Link>
                     <Link href="/locations" className="md:border-r border-slate-50 pr-2">

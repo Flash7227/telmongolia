@@ -1,7 +1,7 @@
 import Link from "next/link";
 const Sidebar = () => {
     return (
-        <div className="h-full p-4 border-r border-brand-1/40 w-[320px]">
+        <div className="h-full p-4 border-r border-brand-1/40 w-[320px] mt-6">
             <ul className="flex flex-col h-full space-y-8 font-medium tracking-tight text-brand-1">
                 <Link href="/shareholders" className="hover:text-brand-2 transition-colors">Хувьцаа эзэмшигчдэд</Link>
                 <Link href="/shareholders/news" className="hover:text-brand-2 transition-colors">Мэдээлэл</Link>

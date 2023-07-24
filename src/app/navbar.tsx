@@ -125,14 +125,14 @@ const Navbar = () => {
               <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
               <div className="fixed inset-0 z-10 overflow-y-auto">
                 <div
-                  className={`fixed right-0 bg-white w-[70%] h-full transition-transform delay-75 ease-linear ${
+                  className={`fixed right-0 bg-brand-1/80 w-[70%] h-full transition-transform delay-75 ease-linear ${
                     isOpen ? "translate-x-2" : "translate-x-full"
                   }`}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="text-right mr-6 mt-4">
                     <button
-                      className="text-slate-950 text-2xl"
+                      className="text-slate-50 text-2xl"
                       onClick={() => handleClose()}
                     >
                       <AiOutlineClose />
