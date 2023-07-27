@@ -145,3 +145,67 @@ export const getShareHoldersNews = async (type:string, page:number) => {
         console.log('There was an error', err);
     }
 }
+export const getNumbers = async (number:string, grade:string, page:number) =>{
+    var url = baseurl + "/api/1/booknumber?status=T&pattern=" + number + "&nitem=36&total&grade=" + grade + "&page=" + page;
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const bookNumber = async (values:any) => {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/booknumber";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getAddresses = async () => {
+    const url = baseurl + '/api/1/neworder/address';
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const newOrder = async (values:any) => {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/neworder";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getCards = async () => {
+    const url = baseurl + '/api/1/card/list';
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

@@ -9,7 +9,7 @@ const Price = ({title, price, list}:{title:string, price:any, list:string[]}) =>
                 <ul className="my-6 text-[14px] flex flex-col gap-6 tracking-tight leading-5 text-slate-900">
                     {
                         list.map((d, index:number)=>(
-                            <li>{d}</li>
+                            <li key={index}>{d}</li>
                         ))
                     }
                 </ul>

@@ -16,3 +16,11 @@
 .aboutus-timeline div{
     @apply mt-4;
 }
+.pad{
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.pad:disabled{
+    border: none;
+}

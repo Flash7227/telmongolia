@@ -3,7 +3,7 @@ const Footer = () => {
     return (
         <div className="border-t border-brand-1/20 text-slate-50 text-xs bg-brand-1">
             <div className="container md:flex items-center justify-between py-3">
-                <ul className="hidden md:flex flex-wrap gap-2">
+                <ul className="md:flex flex-wrap gap-2">
                     <Link href="/aboutus" className="md:border-r border-slate-50 pr-2">
                         <li>Бидний тухай</li>
                     </Link>
