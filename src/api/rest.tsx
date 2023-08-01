@@ -209,3 +209,57 @@ export const getCards = async () => {
         console.log('There was an error', err);
     }
 }
+export const cardBuy = async (values:any) => {
+    if(values.type == 'buycard'){
+        delete values['number'];
+    };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/card/buy";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const checkPayment = async (values:any) => {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/payment/check";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const checkBill = async (values:any) => {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/payment";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

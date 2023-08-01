@@ -36,7 +36,7 @@ const List = (props: any) => {
         <div>
           <div className="flex justify-center mt-2">
             <Paginator
-              totalPages={Math.round(
+              totalPages={Math.ceil(
                 props.list.data.pagination.total /
                   props.list.data.pagination.nitem
               )}

@@ -24,3 +24,12 @@
 .pad:disabled{
     border: none;
 }
+.radiopay button{
+    @apply hidden;
+}
+.radiopay:has(input:checked){
+    @apply  bg-brand-2 text-white;
+}
+.radiopay{
+    @apply border border-transparent hover:border-brand-2 hover:cursor-pointer transition-colors;
+}

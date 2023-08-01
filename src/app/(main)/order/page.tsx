@@ -141,8 +141,9 @@ const Page = () => {
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             onChange={handleFormChange}
-            className="space-y-4 w-[420px] bg-slate-50 shadow-md border border-slate-50 p-4 order-2 md:order-1"
+            className="p-4 order-2 md:order-1 flex flex-wrap justify-center"
           >
+            <div className="w-[380px] px-4 space-y-2 border-r border-slate-50">
             <h5 className="text-brand-1 text-center">Ерөнхий мэдээлэл</h5>
             <FormField
               control={form.control}
@@ -343,7 +344,9 @@ const Page = () => {
                 </FormItem>
               )}
             />
-             <h5 className="text-brand-1 mt-4 text-center">Захиалга өгөх хаяг</h5>
+            </div>
+                  <div className="w-[380px] px-4 space-y-2">
+                  <h5 className="text-brand-1 text-center mt-4 md:mt-0">Захиалга өгөх хаяг</h5>
             <FormField
               control={form.control}
               name="city"
@@ -508,7 +511,13 @@ const Page = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Захиалах</Button>
+            <div className="text-right">
+            <Button type="submit" className="mt-4">Захиалга өгөх</Button>
+            </div>
+                       
+                  </div>
+            
+ 
           </form>
         </Form>
         <div className="max-w-[400px] my-4 order-1">
