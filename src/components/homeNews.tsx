@@ -6,7 +6,7 @@ const HomeNews = async () => {
             <h5 className="font-semibold text-lg text-brand-1">Сүүлд нэмэгдсэн мэдээлэл</h5>
             <ul className="space-y-6">
                 {news['data'].map((d:any, index:number)=>(
-                    <li className="line-clamp-2">{d.title}</li>
+                    <li className="line-clamp-2" key={index}>{d.title}</li>
                 ))}
             </ul>
         </div>

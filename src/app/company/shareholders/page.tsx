@@ -5,7 +5,25 @@ import { Doughnut } from "react-chartjs-2";
 import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-export const data1 = {
+
+const breadcrumb = ["Компанийн засаглал", "Хувьцаа эзэмшигчдийн бүтэц"];
+
+const Page = () => {
+  return (
+    <div>
+      <Breadcrumb data={breadcrumb} />
+
+      <div className="flex flex-wrap">
+        <div className="flex-1 text-center">
+          <div style={{ width: 400 }}>
+            <h5
+              className="title"
+              style={{ textAlign: "center", marginBottom: 20 }}
+            >
+              {" "}
+              2022 оны эхний хагас жилийн байдлаар
+            </h5>
+            <Doughnut data={{
   labels: [
     "Гадаад хувьцаа эзэмшигч",
     "Хувьцаа эзэмшигч хуулийн этгээд",
@@ -28,42 +46,7 @@ export const data1 = {
       borderWidth: 1,
     },
   ],
-};
-
-export const data = {
-  labels: [
-    "Монгол Улсын Засгийн Газар",
-    "Монгол Улсын болон гадаадын иргэн, хуулийн этгээд",
-  ],
-  datasets: [
-    {
-      label: "Хувьцааны тоо",
-      data: [24499287, 1370989],
-      backgroundColor: ["rgba(255, 193, 84, 0.6)", "rgba(71, 179, 156, 0.6)"],
-      borderColor: ["rgba(66, 135, 245, 0.4)"],
-      borderWidth: 1,
-    },
-  ],
-};
-
-const breadcrumb = ["Компанийн засаглал", "Хувьцаа эзэмшигчдийн бүтэц"];
-
-const Page = () => {
-  return (
-    <div>
-      <Breadcrumb data={breadcrumb} />
-
-      <div className="flex flex-wrap">
-        <div className="flex-1 text-center">
-          <div style={{ width: 400 }}>
-            <h5
-              className="title"
-              style={{ textAlign: "center", marginBottom: 20 }}
-            >
-              {" "}
-              2022 оны эхний хагас жилийн байдлаар
-            </h5>
-            <Doughnut data={data1} />
+}} />
 
             <table className="table mt-2">
               <thead>
@@ -106,7 +89,21 @@ const Page = () => {
             >
               Нөлөө бүхий хувьцаа эзэмшигчид
             </h5>
-            <Pie data={data} />
+            <Pie data={{
+  labels: [
+    "Монгол Улсын Засгийн Газар",
+    "Монгол Улсын болон гадаадын иргэн, хуулийн этгээд",
+  ],
+  datasets: [
+    {
+      label: "Хувьцааны тоо",
+      data: [24499287, 1370989],
+      backgroundColor: ["rgba(255, 193, 84, 0.6)", "rgba(71, 179, 156, 0.6)"],
+      borderColor: ["rgba(66, 135, 245, 0.4)"],
+      borderWidth: 1,
+    },
+  ],
+}} />
           </div>
 
           <table className="table mt-2">
