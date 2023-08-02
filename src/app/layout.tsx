@@ -6,7 +6,7 @@ import Topbar from './topbar'
 import Footer from './footer'
 import { Toaster } from "@/components/ui/toaster"
 import Feedback from '@/components/feedback'
-
+import FacebookMessenger from '@/components/facebookMessenger'
 
 const font = Montserrat({ subsets: ['cyrillic'] })
 
@@ -28,6 +28,9 @@ export default function RootLayout({
         <Navbar />
         <main className='grow'>
           {children}
+          {
+            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? false : <FacebookMessenger />
+          }
         </main>
         <Feedback />
         <Footer />

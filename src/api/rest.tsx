@@ -263,3 +263,20 @@ export const checkBill = async (values:any) => {
         console.log('There was an error', err);
     }
 }
+export const paymentPay = async (values:any) => {
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = baseurl + "/api/1/payment/pay";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

@@ -33,3 +33,20 @@
 .radiopay{
     @apply border border-transparent hover:border-brand-2 hover:cursor-pointer transition-colors;
 }
+.news img, .news svg {
+    display: inline !important;
+ }
+ .news{
+    line-height: 1.5715;
+    font-size: 14px;
+ }
+ .news a{
+    color: #1876F2;
+ }
+ .news p {
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+.news ul {
+    list-style-type: disc;
+}
