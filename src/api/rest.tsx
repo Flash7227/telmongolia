@@ -1,11 +1,10 @@
 var baseurl = process.env.BASEURL;
 import Cookies from 'universal-cookie';
-import { object } from 'zod';
 
 
 export async function getCaraosel() {
     try{
-        const res = await fetch(baseurl + '/api/2/coverimg?type=resident');
+        const res = await fetch(process.env.API2 + '/coverimg?type=resident');
         const data = await res.json();
         return data['data'];
     }catch(err){
@@ -22,9 +21,9 @@ export async function login({user_id, user_pass, user_pass_login}:{user_id:strin
         // credentials: "include",
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/login";
+    let url = process.env.API + "/login";
     if (!user_pass_login) {
-        url = baseurl + "/api/1//login/create_onetime";
+        url = process.env.API + "/login/create_onetime";
     }
     try{
         const res = await fetch(url, requestOptions);
@@ -44,7 +43,7 @@ export async function onetime({user_id, onetime, password}:{user_id:string, onet
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/login/onetime";
+    let url = process.env.API2 + "/login/onetime";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -75,7 +74,7 @@ export async function setInfo(obj:any, cust_id:number, type:string){
         },
         body: JSON.stringify(obj),
     };
-    let url = baseurl + "/api/1/cust/" + type;
+    let url = process.env.API + "/cust/" + type;
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -96,7 +95,7 @@ export const getUserInfo =  async ({userId, token}:{userId:string, token:string}
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/user/info";
+    let url = process.env.API + "/user/info";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -106,7 +105,7 @@ export const getUserInfo =  async ({userId, token}:{userId:string, token:string}
     }
 }
 export const getNews = async (type:string, page:number) => {
-    const url = baseurl + '/api/2/news?type=' + type + '&customer=resident&page=' + page;
+    const url = process.env.API2 + '/news?type=' + type + '&customer=resident&page=' + page;
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -116,7 +115,7 @@ export const getNews = async (type:string, page:number) => {
     }
 }
 export const getWorkPlace = async () => {
-    const url = baseurl + '/api/2/workplace';
+    const url = process.env.API2 + '/workplace';
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -126,7 +125,7 @@ export const getWorkPlace = async () => {
     }
 }
 export const getShareHolders = async () => {
-    const url = baseurl + '/api/2/shareholders?limit=1&page=1';
+    const url = process.env.API2 + '/shareholders?limit=1&page=1';
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -136,7 +135,7 @@ export const getShareHolders = async () => {
     }
 }
 export const getShareHoldersNews = async (type:string, page:number) => {
-    const url = baseurl + '/api/2/' + type + '?limit=6&page=' + page;
+    const url = process.env.API2 + '/' + type + '?limit=6&page=' + page;
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -146,7 +145,7 @@ export const getShareHoldersNews = async (type:string, page:number) => {
     }
 }
 export const getNumbers = async (number:string, grade:string, page:number) =>{
-    var url = baseurl + "/api/1/booknumber?status=T&pattern=" + number + "&nitem=36&total&grade=" + grade + "&page=" + page;
+    var url = process.env.API + "/booknumber?status=T&pattern=" + number + "&nitem=36&total&grade=" + grade + "&page=" + page;
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -163,7 +162,7 @@ export const bookNumber = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/booknumber";
+    let url = process.env.API + "/booknumber";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -173,7 +172,7 @@ export const bookNumber = async (values:any) => {
     }
 }
 export const getAddresses = async () => {
-    const url = baseurl + '/api/1/neworder/address';
+    const url = process.env.API + '/neworder/address';
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -190,7 +189,7 @@ export const newOrder = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/neworder";
+    let url = process.env.API + "/neworder";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -200,7 +199,7 @@ export const newOrder = async (values:any) => {
     }
 }
 export const getCards = async () => {
-    const url = baseurl + '/api/1/card/list';
+    const url = process.env.API + '/card/list';
     try{
         const res = await fetch(url);
         const data = await res.json();
@@ -220,7 +219,7 @@ export const cardBuy = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/card/buy";
+    let url = process.env.API + "/card/buy";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -237,7 +236,7 @@ export const checkPayment = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/payment/check";
+    let url = process.env.API + "/payment/check";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -254,7 +253,7 @@ export const checkBill = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/payment";
+    let url = process.env.API + "/payment";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -271,7 +270,7 @@ export const paymentPay = async (values:any) => {
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/payment/pay";
+    let url = process.env.API + "/payment/pay";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();

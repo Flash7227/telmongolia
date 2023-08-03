@@ -22,7 +22,7 @@ export const getUserVas =  async ({userId, token}:{userId:string, token:string})
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/cust/vas";
+    let url = process.env.API + "/cust/vas";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -43,7 +43,7 @@ export const getUserUsage =  async ({userId, token}:{userId:string, token:string
         },
         body: JSON.stringify(values),
       };
-    let url = baseurl + "/api/1/cust/info/detail";
+    let url = process.env.API + "/cust/info/detail";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
@@ -53,7 +53,7 @@ export const getUserUsage =  async ({userId, token}:{userId:string, token:string
     }
 }
 export const getEachNews = async (id:number, type:string) => {
-    const url = baseurl + '/api/2/' + type + '?id=' + id;
+    const url = process.env.API2 + '/' + type + '?id=' + id;
     console.log(url, 'url is here');
     try{
         const res = await fetch(url);
@@ -64,7 +64,7 @@ export const getEachNews = async (id:number, type:string) => {
     }
 }
 export const getEachNewsShareholders = async (id:number) => {
-    const url = baseurl + '/api/2/shareholders?id=' + id;
+    const url = process.env.API2 + '/shareholders?id=' + id;
     console.log(url, 'url is here');
     try{
         const res = await fetch(url);
