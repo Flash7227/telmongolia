@@ -14,8 +14,6 @@ import { format_date } from "@/lib/helper";
 const breadcrumb = ["Хүний нөөц"];
 
 const Page = async () => {
-    let works = await getWorkPlace();
-    works = (works.data).filter((each:any) => isExpired(each.expires_at));
     function isExpired(d:any){
         var current = Math.floor(new Date().getTime() / 1000);
         var exp = Math.floor(new Date(d).getTime() / 1000);
@@ -24,7 +22,11 @@ const Page = async () => {
         }
         return true;
       }
-    
+
+    var works = await getWorkPlace();
+    if(works){
+        works = await (works.data).filter((each:any) => isExpired(each.expires_at));
+    }
     return (
         <div>
               <Breadcrumb data={breadcrumb} />
@@ -41,6 +43,7 @@ const Page = async () => {
                 </TableHeader>
                 <TableBody>
                     {
+                        works && 
                         works.map((d:any, index:number)=>(
                             <TableRow key={index}>
                                 <TableCell className="font-medium">{d.workplace_id}</TableCell>

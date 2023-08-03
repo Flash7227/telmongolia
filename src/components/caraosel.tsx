@@ -1,13 +1,17 @@
-import { getCaraosel } from '../api/rest'
-import ImageSlider from './imageSlider';
+import { getCaraosel } from "../api/rest";
+import ImageSlider from "./imageSlider";
 
 const Caraosel = async () => {
-    const caraosel = await getCaraosel();
-    return (
+  const caraosel = await getCaraosel();
+  return (
+    <>
+      {caraosel && (
         <div>
-            <ImageSlider data={caraosel} />
+          <ImageSlider data={caraosel} />
         </div>
-    );
-}
+      )}
+    </>
+  );
+};
 
-export default  Caraosel;
+export default Caraosel;
