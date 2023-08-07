@@ -1,6 +1,7 @@
 import { getEachNews } from "@/api/rest";
 import { format_date } from "@/lib/helper";
 import Breadcrumb from "@/components/ui/breadcrumb";
+import parse from 'html-react-parser';
 
 const breadcrumb = ["Мэдээлэл"];
 const Page = async ({ params }: { params: { each: number } }) => {
@@ -14,7 +15,7 @@ const Page = async ({ params }: { params: { each: number } }) => {
             {news.title}
           </div>
           <div className="news">
-            <div dangerouslySetInnerHTML={{ __html: news.body }} />
+            {parse(news.body)}
           </div>
           <div className="text-right font-bold text-sm text-brand-1/80 my-2 uppercase">
             Нийтлэгдсэн {format_date(news.created_at)}
