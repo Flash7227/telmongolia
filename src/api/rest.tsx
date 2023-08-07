@@ -279,3 +279,14 @@ export const paymentPay = async (values:any) => {
         console.log('There was an error', err);
     }
 }
+export const getEachNews = async (id:any, type:string) => {
+    const url = process.env.API2 + '/' + type + '?id=' + id;
+    console.log(url, 'url is here');
+    try{
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

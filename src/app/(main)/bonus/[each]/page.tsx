@@ -1,4 +1,4 @@
-import { getEachNews } from "@/api/server";
+import { getEachNews } from "@/api/rest";
 import { format_date } from "@/lib/helper";
 import Breadcrumb from "@/components/ui/breadcrumb";
 
