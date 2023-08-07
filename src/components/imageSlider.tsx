@@ -6,6 +6,7 @@ import Link from "next/link";
 
 
 const ImageSlider = ({data}:{data:any}) => {
+    console.log(data, 'crasoole lets here');
     const [currenIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {

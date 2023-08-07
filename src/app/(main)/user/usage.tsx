@@ -42,37 +42,42 @@ const Usage = async ({ userId, token }: { userId: string; token: string }) => {
 
   return (
     <div>
-      <Card
-        value={remainingUnit(userUsage.data.counter)}
-        title="Нэгж"
-        icon={<BiCoinStack />}
-      />
-      {userUsage.data["subs"]["subs"]["svcDomain"] === 5 ||
-      userUsage.data["subs"]["subs"]["svcDomain"] === 1 ? (
-        <Card
-          value={remainingMinute(userUsage.data.counter)}
-          title="Үлдсэн минут"
-          icon={<BiTime />}
-        />
-      ) : (
-        userUsage.data["subs"]["subs"]["svcDomain"] === 4 && (
+      {
+        userUsage &&
+        <div>
           <Card
-            value={userUsage.data.speed}
-            title="Хурд"
+            value={remainingUnit(userUsage.data.counter)}
+            title="Нэгж"
             icon={<BiCoinStack />}
           />
-        )
-      )}
-      <Card
-        title="Төлөв"
-        value={stateToWord(userUsage.data.account.state)}
-        icon={<BiFlag />}
-      />
-      <Card
-        value={formatDate(userUsage.data.account.accExpireAt)}
-        title="Дуусах огноо"
-        icon={<BiCalendarEvent />}
-      />
+          {userUsage.data["subs"]["subs"]["svcDomain"] === 5 ||
+          userUsage.data["subs"]["subs"]["svcDomain"] === 1 ? (
+            <Card
+              value={remainingMinute(userUsage.data.counter)}
+              title="Үлдсэн минут"
+              icon={<BiTime />}
+            />
+          ) : (
+            userUsage.data["subs"]["subs"]["svcDomain"] === 4 && (
+              <Card
+                value={userUsage.data.speed}
+                title="Хурд"
+                icon={<BiCoinStack />}
+              />
+            )
+          )}
+          <Card
+            title="Төлөв"
+            value={stateToWord(userUsage.data.account.state)}
+            icon={<BiFlag />}
+          />
+          <Card
+            value={formatDate(userUsage.data.account.accExpireAt)}
+            title="Дуусах огноо"
+            icon={<BiCalendarEvent />}
+          />
+        </div>
+      }
     </div>
   );
 };
