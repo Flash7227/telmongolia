@@ -52,7 +52,7 @@ export const getUserUsage =  async ({userId, token}:{userId:string, token:string
         console.log('There was an error', err);
     }
 }
-export const getEachNews = async (id:number, type:string) => {
+export const getEachNews = async (id:any, type:string) => {
     const url = process.env.API2 + '/' + type + '?id=' + id;
     console.log(url, 'url is here');
     try{
