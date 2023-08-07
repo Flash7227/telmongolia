@@ -54,8 +54,6 @@ const Page = () => {
                     className="object-cover group-hover:scale-[1.1] transition-transform duration-300"
                     fill
                     alt={d["title"]}
-                    sizes="(max-width: 300px) 40vw"
-                    quality={70}
                   />
                 </div>
                 <div className="text-sm font-semibold w-full h-[40px] overflow-ellipsis overflow-hidden mt-4 px-4 tracking-tight text-center">
