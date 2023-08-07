@@ -77,7 +77,7 @@ const reGroup = (dat:any) =>{
 
 const Vas = async ({userId, token}:{userId:string, token:string}) => {
     const userVas = await getUserVas({userId, token});
-    const vas = reGroup(userVas['data']);
+    const vas = await reGroup(userVas['data']);
     
     return (
         <div>
