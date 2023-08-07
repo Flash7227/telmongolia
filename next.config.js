@@ -5,7 +5,7 @@ const nextConfig = {
     API2: process.env.API2,
     API: process.env.API,
   },
-  images: { domains: ['api2.telecommongolia.mn'], },
+  images: { domains: ['api2.telecommongolia.mn'], unoptimized: true},
     async rewrites() {
         return [
           {

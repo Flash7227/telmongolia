@@ -1,3 +1,4 @@
+"use client"
 import { getEachNews } from "@/api/rest";
 import { format_date } from "@/lib/helper";
 import Breadcrumb from "@/components/ui/breadcrumb";
@@ -14,7 +15,7 @@ const Page = async ({ params }: { params: { each: number } }) => {
           <div className="text-center my-4 text-2xl font-semibold text-brand-1 border-b border-brand-1/20 pb-4 tracking-tight">
             {news.title}
           </div>
-          <div className="news">
+          <div className="news" suppressHydrationWarning={false}>
             {parse(news.body)}
           </div>
           <div className="text-right font-bold text-sm text-brand-1/80 my-2 uppercase">
