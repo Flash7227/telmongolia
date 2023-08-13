@@ -6,7 +6,27 @@ import parse from 'html-react-parser';
 
 const breadcrumb = ["Урамшуулал"];
 const Page = async ({ params }: { params: { each: number } }) => {
-  const news = await getEachNews(params.each, "news");
+  // const news = await getEachNews(params.each, "news");
+  async function getNews() {
+    const url = process.env.API2 + '/' + 'news' + '?id=' + params.each;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const news = await getNews();
   return (
     <div className="mt-5">
       <Breadcrumb data={breadcrumb} />
