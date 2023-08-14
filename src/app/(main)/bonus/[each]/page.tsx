@@ -1,8 +1,10 @@
 "use client"
+import axios from 'axios';
 import { getEachNews } from "@/api/rest";
 import { format_date } from "@/lib/helper";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import parse from 'html-react-parser';
+
 
 const breadcrumb = ["Урамшуулал"];
 const Page = async ({ params }: { params: { each: number } }) => {
@@ -10,18 +12,8 @@ const Page = async ({ params }: { params: { each: number } }) => {
   async function getNews() {
     const url = process.env.API2 + '/' + 'news' + '?id=' + params.each;
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      return result;
+      const response = await axios.get<any, any>(url);
+      return response.data;
     } catch (err) {
       console.log(err);
     }
