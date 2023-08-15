@@ -1,4 +1,6 @@
-import { getUserVas } from "@/api/server";
+"use client"
+import { useEffect, useState } from "react";
+import { getUserVas } from "@/api/rest";
 
 const reGroup = (dat:any) =>{
     var obj1 = {
@@ -75,9 +77,17 @@ const reGroup = (dat:any) =>{
  }
 
 
-const Vas = async ({userId, token}:{userId:string, token:string}) => {
-    const userVas = await getUserVas({userId, token});
-    const vas = await reGroup(userVas['data']);
+const Vas = ({userId, token}:{userId:string, token:string}) => {
+    const [vas, setVas] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await getUserVas({userId, token});
+            const userVas = await reGroup(res['data']);
+            setVas(userVas);
+        };
+        fetchData();
+      }, []);
+
     
     return (
         <div>
@@ -92,7 +102,7 @@ const Vas = async ({userId, token}:{userId:string, token:string}) => {
                     </tr>
                 </thead>
                 <tbody className="text-slate-800 text-[14px]">
-                {vas.map((v:any, index:number)=>(
+                {vas.length > 0 && vas.map((v:any, index:number)=>(
                     <tr key={index}>
                         <td style={{paddingRight: 8}} className="p-2">#</td>
                         <td className="p-2">{v['prodName']}</td>

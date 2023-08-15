@@ -10,7 +10,7 @@ const Caraosel = () => {
       const res = await getCaraosel();
       setCaraosel(res);
     };
-    const news = fetchData();
+    fetchData();
   }, []);
   return (
     <>

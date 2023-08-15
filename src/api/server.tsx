@@ -10,27 +10,6 @@ export const authCheck = async () => {
         return null;
     }
 }
-export const getUserVas =  async ({userId, token}:{userId:string, token:string}) =>  {
-    const values = {
-        user_id: userId,
-        token: token,
-      };
-    const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-    let url = process.env.API + "/cust/vas";
-    try{
-        const res = await fetch(url, requestOptions);
-        const data = await res.json();
-        return data;
-    }catch(err){
-        console.log('There was an error', err);
-    }
-}
 export const getUserUsage =  async ({userId, token}:{userId:string, token:string}) =>  {
     const values = {
         user_id: userId,
