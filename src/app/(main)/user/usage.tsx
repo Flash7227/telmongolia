@@ -1,4 +1,6 @@
-import { getUserUsage } from "@/api/server";
+"use client"
+import { useEffect, useState } from "react";
+import { getUserUsage } from "@/api/rest";
 import { BiCoinStack, BiTime, BiFlag, BiCalendarEvent } from "react-icons/bi";
 
 function remainingMinute(obj: []) {
@@ -37,30 +39,37 @@ function formatDate(d: any) {
   var temp = new Date(d).toLocaleDateString();
   return temp;
 }
-const Usage = async ({ userId, token }: { userId: string; token: string }) => {
-  const userUsage = await getUserUsage({ userId, token });
+const Usage = ({ userId, token }: { userId: string; token: string }) => {
+  const [usage, setUsage] = useState();
+  useEffect(() => {
+      const fetchData = async () => {
+          const res = await getUserUsage({ userId, token });
+          setUsage(res);
+      };
+      fetchData();
+    }, []);
 
   return (
     <div>
       {
-        userUsage &&
+        usage &&
         <div>
           <Card
-            value={remainingUnit(userUsage.data.counter)}
+            value={remainingUnit(usage['data']['counter'])}
             title="Нэгж"
             icon={<BiCoinStack />}
           />
-          {userUsage.data["subs"]["subs"]["svcDomain"] === 5 ||
-          userUsage.data["subs"]["subs"]["svcDomain"] === 1 ? (
+          {usage['data']["subs"]["subs"]["svcDomain"] === 5 ||
+          usage['data']["subs"]["subs"]["svcDomain"] === 1 ? (
             <Card
-              value={remainingMinute(userUsage.data.counter)}
+              value={remainingMinute(usage['data']['counter'])}
               title="Үлдсэн минут"
               icon={<BiTime />}
             />
           ) : (
-            userUsage.data["subs"]["subs"]["svcDomain"] === 4 && (
+            usage["data"]["subs"]["subs"]["svcDomain"] === 4 && (
               <Card
-                value={userUsage.data.speed}
+                value={usage['data']['speed']}
                 title="Хурд"
                 icon={<BiCoinStack />}
               />
@@ -68,11 +77,11 @@ const Usage = async ({ userId, token }: { userId: string; token: string }) => {
           )}
           <Card
             title="Төлөв"
-            value={stateToWord(userUsage.data.account.state)}
+            value={stateToWord(usage['data']['account']['state'])}
             icon={<BiFlag />}
           />
           <Card
-            value={formatDate(userUsage.data.account.accExpireAt)}
+            value={formatDate(usage['data']['account']['accExpireAt'])}
             title="Дуусах огноо"
             icon={<BiCalendarEvent />}
           />
