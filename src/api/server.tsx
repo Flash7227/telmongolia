@@ -10,15 +10,3 @@ export const authCheck = async () => {
         return null;
     }
 }
-
-export const getEachNewsShareholders = async (id:number) => {
-    const url = process.env.API2 + '/shareholders?id=' + id;
-    console.log(url, 'url is here');
-    try{
-        const res = await fetch(url);
-        const data = await res.json();
-        return data;
-    }catch(err){
-        console.log('There was an error', err);
-    }
-}
