@@ -1,5 +1,4 @@
 "use client"
-import axios from 'axios';
 import { getEachNews } from "@/api/rest";
 import { format_date } from "@/lib/helper";
 import Breadcrumb from "@/components/ui/breadcrumb";
@@ -9,11 +8,12 @@ import parse from 'html-react-parser';
 const breadcrumb = ["Урамшуулал"];
 const Page = async ({ params }: { params: { each: number } }) => {
   // const news = await getEachNews(params.each, "news");
-  async function getNews() {
+  const getNews = async ()=> {
     const url = process.env.API2 + '/' + 'news' + '?id=' + params.each;
     try {
-      const response = await axios.get<any, any>(url);
-      return response.data;
+      const response = await fetch(url);
+      let result = await response.json();
+      return result;
     } catch (err) {
       console.log(err);
     }
