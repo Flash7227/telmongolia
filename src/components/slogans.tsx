@@ -1,11 +1,13 @@
 "use client"
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast"
 const niceWords = ['Найдвартай байдал', 'Шуурхай үйлчилгээ', 'Найрсаг хамт олон', 'Хямд үнэ', 'Мэргэжилийн үйлчилгээ'];
 
 const Slogans = () => {
+    const { toast } = useToast()
     const [currenIndex, setCurrentIndex] = useState(0);
-
+    const [secretCount, setSecrentCount] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => {
             if(currenIndex === niceWords.length - 1){
@@ -17,12 +19,25 @@ const Slogans = () => {
         }, 3000);
         return () => clearInterval(interval);
       }, [currenIndex]);
+      const secretFunction = () =>{
+        if(secretCount === 28 ){
+            toast({
+                title: "Hi Myagmaa",
+                description: "М + Ө = <3 2023/08/16",
+              })
+        }else{
+            setSecrentCount(secretCount + 1);
+        }
+        if(secretCount > 6){
+            console.log(secretCount);
+        }
+      }
     return (
         <div className="relative bg-transparent min-h-[140px] 2xl:min-h-[190px] text-center bg-gradient-to-r from-[#135EA5] from-10% to-[#00AFEF] to-100% font-bold  tracking-tight w-full">
         
             <div className="relative h-full w-full z-20 py-2 2xl:py-8">
                 <p className="text-base text-slate-200/80">Бид таны</p>
-                <h5 className="text-slate-50 text-4xl">Харилцаа бүрийг холбоно.</h5>
+                <h5 className="text-slate-50 text-4xl">Харилцаа бүрийг <span onClick={()=>secretFunction()}>холбоно</span>.</h5>
                 {/* <h5 className="text-slate-50 text-3xl">Харилцаа бүрийг холбоно.</h5> */}
                 <div className="relative h-[46px]">
                     {niceWords.map((word, index:number)=>(
