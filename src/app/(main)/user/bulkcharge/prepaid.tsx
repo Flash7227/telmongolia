@@ -44,6 +44,7 @@ const Prepaid = (props: any) => {
   function calculate() {
     interface tempInterface{
       user_id: string,
+      subs_id: string,
       numOfRecurring: number,
       amount: number
     }
@@ -60,6 +61,7 @@ const Prepaid = (props: any) => {
           if (filtered.length === 1) {
             temp = {
               user_id: (bulkmonths[i] as HTMLInputElement).name,
+              subs_id: filtered[0]['subs']['subsId'],
               numOfRecurring: parseInt(
                 (bulkmonths[i] as HTMLInputElement).value
               ),
@@ -94,6 +96,7 @@ const Prepaid = (props: any) => {
             } else {
               temp = {
                 user_id: (bulkremains[i] as HTMLInputElement).name,
+                subs_id: filtered[0]['subs']['subsId'],
                 numOfRecurring: 0,
                 amount: parseInt((bulkremains[i] as HTMLInputElement).value)
               };
