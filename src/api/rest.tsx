@@ -343,3 +343,67 @@ export const getEachNewsShareholders = async (id:number) => {
         console.log('There was an error', err);
     }
 }
+export const getAllProducts =  async (custId:string, token:string) =>  {
+    const values = {
+        cust_id: custId,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const getBulkList =  async (custId:string, token:string) =>  {
+    const values = {
+        cust_id: custId,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info/bulkrecharge/list";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const bulkCalculate =  async (custId:string, data:object, token:string) =>  {
+    const values = {
+        cust_id: custId,
+        data: data,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info/bulkrecharge/calculate";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}

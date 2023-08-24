@@ -2,17 +2,18 @@
 import { getUserInfo } from "@/api/rest";
 import {
   BiMobile,
-  BiEditAlt,
   BiAt,
   BiCurrentLocation,
+  BiListCheck,
   BiSolidUserCircle,
 } from "react-icons/bi";
 import Image from "next/image";
 import EditInfo from "./editInfo";
 import { useState, useEffect } from "react";
 
-const Info = ({ userId, token }: { userId: string; token: string }) => {
+const Info = ({ userId, token, custId }: { userId: string, token: string, custId:string}) => {
   const [userInfo, setUserInfo] = useState();
+  const [chargeOpen, setChargeOpen] = useState('');
   const getData = async () => {
     const temp = await getUserInfo({ userId, token });
     setUserInfo(temp);
@@ -24,6 +25,9 @@ const Info = ({ userId, token }: { userId: string; token: string }) => {
   const handleEdit = async () => {
     getData();
   };
+  const openBulkCharge = () =>{
+    setChargeOpen(custId);
+  }
   return (
     <div className="border border-slate-50 p-2 rounded-2xl shadow-sm shadow-brand-1/30 w-[400px]">
       {userInfo && (

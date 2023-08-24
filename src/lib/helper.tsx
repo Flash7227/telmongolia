@@ -9,3 +9,7 @@ export  function format_date2(d:any){
     }
     return false;
 }
+export  function format_date3(d:any){
+    var temp = d.substring(0, 10);
+    return temp;
+}

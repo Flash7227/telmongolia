@@ -17,7 +17,7 @@ const Page = ({ params }: { params: { each: number } }) => {
   }, []);
 
   return (
-    <div className="mt-5">
+    <div>
       <Breadcrumb data={breadcrumb} />
       {news && (
         <div>

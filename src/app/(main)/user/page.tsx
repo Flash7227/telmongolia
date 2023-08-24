@@ -18,7 +18,12 @@ const  Page = async () => {
                 Хэрэглэгчийн <span className='text-brand-3 italic'>булан</span>
             </h1>
             <div className='flex gap-14 flex-wrap justify-center items-center mt-2'>
-                <Info userId={userdata.data.userId} token={userdata.jwt}/>
+                <div>
+                    <Info userId={userdata.data.userId} token={userdata.jwt} custId={userdata.data.custId}/>
+                    <div className="text-center mt-[40px]">
+                        <a href="/user/bulkcharge" className="uppercase text-white bg-brand-1 px-6 py-2 rounded-md hover:bg-brand-2">Бөөнөөр цэнэглэх</a>
+                    </div>
+                </div>
                 <Usage userId={userdata.data.userId} token={userdata.jwt}/>
                 <Vas userId={userdata.data.userId} token={userdata.jwt}/>
             </div>

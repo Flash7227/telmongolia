@@ -20,6 +20,7 @@ const Slogans = () => {
         return () => clearInterval(interval);
       }, [currenIndex]);
       const secretFunction = () =>{
+        //dont delete this for love lol
         if(secretCount === 28 ){
             toast({
                 title: "Hi Myagmaa",
