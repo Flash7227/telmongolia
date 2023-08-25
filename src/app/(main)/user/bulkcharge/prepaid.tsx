@@ -11,8 +11,12 @@ import { format_date3 } from "@/lib/helper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { bulkCalculate } from "@/api/rest";
+import Calculated from "./calculated";
+import { useState } from "react";
 
 const Prepaid = (props: any) => {
+  const [calculatedData, setCalculatedData] = useState();
+
   function domainName(d: any) {
     if (d === 5) {
       return "Суурин утас";
@@ -41,7 +45,7 @@ const Prepaid = (props: any) => {
       return d;
     }
   }
-  function calculate() {
+  const calculate = async () => {
     interface tempInterface{
       user_id: string,
       subs_id: string,
@@ -115,7 +119,8 @@ const Prepaid = (props: any) => {
   }
     const finishedArr = Object.values(bulkArr);
     // console.log(finishedArr);
-    const res = bulkCalculate(props.custId, finishedArr, props.token);
+    const res = await bulkCalculate(props.custId, finishedArr, props.token);
+    setCalculatedData(res['data']['objects']);
     console.log(res);
   }
 
@@ -136,56 +141,62 @@ const Prepaid = (props: any) => {
     }
   }
   return (
-    <div>
-      <Table className="text-[13px] text-[#797979] font-normal">
-        <TableHeader>
-          <TableRow>
-            <TableHead>№</TableHead>
-            <TableHead>Үйлчилгээний дугаар</TableHead>
-            <TableHead>Үндсэн тариф</TableHead>
-            <TableHead>Дансны үлдэгдэл</TableHead>
-            <TableHead>Дуусах огноо</TableHead>
-            <TableHead>Суурь хураамж</TableHead>
-            <TableHead>Сунгах сар</TableHead>
-            <TableHead>Хэрэглээ</TableHead>
-            <TableHead>Төлөх дүн</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {props.data.map((d: any, index: number) => (
-            <TableRow key={index}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{d["subs"]["userId"]}</TableCell>
-              <TableCell>{d["subs"]["prodName"]}</TableCell>
-              {/* <TableCell>{domainName(d['subs']['svcDomain'])}</TableCell> */}
-              <TableCell>{d["account"]["remains"]}</TableCell>
-              <TableCell>
-                {format_date3(d["account"]["lifecycle"]["accExpireAt"])}
-              </TableCell>
-              <TableCell>{d["recurring"]["monthlyFee"]}</TableCell>
-              <TableCell>
-                <Input
-                  className="w-[80px] h-[30px] bulkmonth"
-                  name={d["subs"]["userId"]}
-                  onKeyDown={checkInput}
-                />
-              </TableCell>
-              <TableCell>
-                <Input
-                  className="w-[100px] h-[30px] bulkremains"
-                  name={d["subs"]["userId"]}
-                  onKeyDown={checkInput}
-                />
-              </TableCell>
-              <TableCell>
-                <span id={d["subs"]["userId"]}>0</span>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <div className="mt-2">
+      <div className="border p-2">
       <div className="text-right">
-        <Button onClick={() => calculate()}>Бодох</Button>
+          <Button onClick={() => calculate()}>Бодох</Button>
+        </div>
+        <Table className="text-[13px] text-[#797979] font-normal border mt-2">
+          <TableHeader className="bg-gray-200">
+            <TableRow>
+              <TableHead>№</TableHead>
+              <TableHead>Үйлчилгээний дугаар</TableHead>
+              <TableHead>Үндсэн тариф</TableHead>
+              <TableHead>Дансны үлдэгдэл</TableHead>
+              <TableHead>Дуусах огноо</TableHead>
+              <TableHead>Суурь хураамж</TableHead>
+              <TableHead>Сунгах сар</TableHead>
+              <TableHead>Хэрэглээ</TableHead>
+              <TableHead>Төлөх дүн</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {props.data.map((d: any, index: number) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{d["subs"]["userId"]}</TableCell>
+                <TableCell>{d["subs"]["prodName"]}</TableCell>
+                {/* <TableCell>{domainName(d['subs']['svcDomain'])}</TableCell> */}
+                <TableCell>{d["account"]["remains"]}</TableCell>
+                <TableCell>
+                  {format_date3(d["account"]["lifecycle"]["accExpireAt"])}
+                </TableCell>
+                <TableCell>{d["recurring"]["monthlyFee"]}</TableCell>
+                <TableCell>
+                  <Input
+                    className="w-[80px] h-[30px] bulkmonth"
+                    name={d["subs"]["userId"]}
+                    onKeyDown={checkInput}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    className="w-[100px] h-[30px] bulkremains"
+                    name={d["subs"]["userId"]}
+                    onKeyDown={checkInput}
+                  />
+                </TableCell>
+                <TableCell>
+                  <span id={d["subs"]["userId"]}>0</span>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      <div className="border p-2 my-4">
+        <Calculated data={calculatedData}/>
       </div>
     </div>
   );

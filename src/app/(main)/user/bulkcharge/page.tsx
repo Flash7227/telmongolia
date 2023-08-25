@@ -59,7 +59,7 @@ const Page = () => {
       
       {
         products && userData ?
-        <div className='border p-2 shadow-sm mb-4'>
+        <div>
           <Typeselecter onSelectedChange={handleSelectedChange}/>
             {
               selected === 'prepaid' ?
