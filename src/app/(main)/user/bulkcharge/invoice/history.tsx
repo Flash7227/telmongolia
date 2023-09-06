@@ -17,14 +17,21 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { BiDownload, BiQr } from "react-icons/bi";
+import Loader from "@/components/ui/loader";
+import { InvoiceDownload } from "@/api/rest";
+import { InvoicePay } from "@/api/rest";
 
 const History = (props: any) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const handleClose = () => {
     props.onHistoryClose(false);
   };
   const fetch = async () => {
+    setLoading(true);
     const res = await InvoiceHistory(props.custId, props.token);
+    setLoading(false);
     setData(res["data"]);
   };
   useEffect(() => {
@@ -33,20 +40,31 @@ const History = (props: any) => {
   const findTotal = (d: string) => {
     const temp = JSON.parse(d);
     let total = 0;
-
     for (const key in temp) {
       total += temp[key]["vatAmt"];
       total += temp[key]["amount"];
     }
-
     return total;
   };
+  const downloadInvoice = async (id:number) => {
+    setLoading(true);
+    const res = await InvoiceDownload(props.custId, id, props.token);
+    setLoading(true);
+    console.log(res);
+  }
+  const payInvoice = async (id:number) => {
+    setLoading(true);
+    const res = await InvoicePay(props.custId, id, props.token);
+    setLoading(true);
+    console.log(res);
+  }
   return (
     <Dialog open={props.open} onOpenChange={handleClose}>
       <DialogContent className="max-w-[600px] max-h-[440px] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>Нэхэмжлэхийн түүх</DialogTitle>
             <div>
+              {loading && <Loader />}
               <Table className="text-center">
                 <TableHeader>
                   <TableRow>
@@ -65,8 +83,8 @@ const History = (props: any) => {
                         <TableCell>{findTotal(d["charge"])}₮</TableCell>
                         <TableCell>
                             <div className="flex gap-2 justify-center">
-                                <Button className="flex gap-1 text-[14px]"><BiDownload/> Татах</Button>
-                                <Button className="flex gap-1 text-[14px]"><BiQr/>Төлөх</Button>
+                                <Button className="flex gap-1 text-[14px]" onClick={()=>downloadInvoice(d["id"])}><BiDownload/> Татах</Button>
+                                <Button className="flex gap-1 text-[14px]" onClick={()=>payInvoice(d["id"])}><BiQr/>Төлөх</Button>
                             </div>
                         </TableCell>
                       </TableRow>

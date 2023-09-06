@@ -64,7 +64,7 @@ const Calculated = (props: any) => {
     // console.log(res);
     toast({
       title: res['result'],
-      description: res['message'] + ' Та үүссэн нэхэмжлэхээ нэхэмжлэх түүх товчийг даран шалгана уу!',
+      description: res['message'] + ' Нэхэмжлэх түүх товчийг даран шалгана уу!',
       duration: 15000
     })
   }

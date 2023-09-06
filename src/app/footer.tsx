@@ -10,7 +10,7 @@ const Footer = () => {
                     <Link href="https://shilendans.gov.mn/organization/42441" target="_blank" rel="noreferrer" className="md:border-r border-slate-50 pr-2">
                         <li>Шилэн данс</li>
                     </Link>
-                    <Link href="/shareholders" className="md:border-r border-slate-50 pr-2">
+                    <Link href="/shareholders/news" className="md:border-r border-slate-50 pr-2">
                         <li>Хувьцаа эзэмшигчдэд</li>
                     </Link>
                     <Link href="/company/construct" className="md:border-r border-slate-50 pr-2">
