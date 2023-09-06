@@ -12,10 +12,47 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { bulkCalculate } from "@/api/rest";
 import Calculated from "./calculated";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { BiRefresh } from "react-icons/bi";
+import History from "./invoice/history";
 
 const Prepaid = (props: any) => {
-  const [calculatedData, setCalculatedData] = useState();
+  interface calculatedType{
+    charge: [],
+    chargeDetail: [],
+    custId: number,
+    custType: string
+  }
+  const [calculatedData, setCalculatedData] = useState<calculatedType>();
+  const [isChanged, setIsChanged] = useState(true);
+  const [invoiceHistory, setInvoiceHistory] = useState(false);
+  
+  useEffect(()=>{
+    if(calculatedData){
+        const fresh = document.querySelectorAll(".prepaid span");
+        for (var i = 0; i < fresh.length; i++) {
+          fresh[i].innerHTML = (0).toString();
+        }
+          for (var each of calculatedData['chargeDetail']) {
+              let lastAmount = 0;
+              let lastDiscount = 0;
+              let pymCdName:string;
+              pymCdName = each['pymCdName'];
+              if(pymCdName.includes('discount')){
+                const el = document.querySelectorAll("span[id='discount-"+ each['userId'] + "']");
+                // console.log('discount here', el[0].innerHTML, each['amount']);
+                lastDiscount += parseInt(el[0].innerHTML);
+                lastDiscount += each['amount'];
+                el[0].innerHTML = lastDiscount.toString();
+              }else{
+                const el = document.querySelectorAll("span[id='"+ each['userId'] + "']");
+                lastAmount += parseInt(el[0].innerHTML);
+                lastAmount += each['amount'] + each['vatAmt'];
+                el[0].innerHTML = lastAmount.toString();
+              }
+          }
+    }
+  },[calculatedData]);
 
   function domainName(d: any) {
     if (d === 5) {
@@ -113,15 +150,22 @@ const Prepaid = (props: any) => {
       }
     }
     // console.log(bulkArr);
-    for (var key of Object.keys(bulkArr)) {
-      const el = document.querySelectorAll("span[id='"+ key + "']");
-      el[0].innerHTML = bulkArr[key]['amount'];
-  }
     const finishedArr = Object.values(bulkArr);
-    // console.log(finishedArr);
-    const res = await bulkCalculate(props.custId, finishedArr, props.token);
-    setCalculatedData(res['data']['objects']);
-    console.log(res);
+    if(finishedArr.length > 0){
+      const res = await bulkCalculate(props.custId, finishedArr, props.token);
+      setCalculatedData(res['data']['objects']);
+      setIsChanged(false);
+    }else{
+      refreshFileds();
+    }
+
+    // console.log(res);
+  }
+  const refreshFileds = async () => {
+    const fresh = document.querySelectorAll(".prepaid span");
+        for (var i = 0; i < fresh.length; i++) {
+          fresh[i].innerHTML = (0).toString();
+        }
   }
 
   function checkInput(e: any) {
@@ -134,6 +178,7 @@ const Prepaid = (props: any) => {
     const numberPatter = /^([-0-9])| +$/; //with space, and dash
     if (cyrillicPattern.test(e.key)) {
       // console.log('mn');
+      setIsChanged(true);
     } else {
       if (!numberPatter.test(e.key)) {
         e.preventDefault();
@@ -142,11 +187,13 @@ const Prepaid = (props: any) => {
   }
   return (
     <div className="mt-2">
+      {invoiceHistory && <History onHistoryClose={()=>setInvoiceHistory(false)} open={invoiceHistory} custId={props.custId} token={props.token}/>}
       <div className="border p-2">
-      <div className="text-right">
+      <div className="flex justify-between">
+          <Button onClick={()=>setInvoiceHistory(true)}>Нэхэмжлэх түүх</Button>
           <Button onClick={() => calculate()}>Бодох</Button>
         </div>
-        <Table className="text-[13px] text-[#797979] font-normal border mt-2">
+        <Table className="text-[13px] text-[#797979] font-normal border mt-2 prepaid">
           <TableHeader className="bg-gray-200">
             <TableRow>
               <TableHead>№</TableHead>
@@ -157,6 +204,7 @@ const Prepaid = (props: any) => {
               <TableHead>Суурь хураамж</TableHead>
               <TableHead>Сунгах сар</TableHead>
               <TableHead>Хэрэглээ</TableHead>
+              <TableHead>Хөнгөлөлт</TableHead>
               <TableHead>Төлөх дүн</TableHead>
             </TableRow>
           </TableHeader>
@@ -177,6 +225,8 @@ const Prepaid = (props: any) => {
                     className="w-[80px] h-[30px] bulkmonth"
                     name={d["subs"]["userId"]}
                     onKeyDown={checkInput}
+                    onChange={()=>setIsChanged(true)}
+                    maxLength={2}
                   />
                 </TableCell>
                 <TableCell>
@@ -184,7 +234,13 @@ const Prepaid = (props: any) => {
                     className="w-[100px] h-[30px] bulkremains"
                     name={d["subs"]["userId"]}
                     onKeyDown={checkInput}
+                    onChange={()=>setIsChanged(true)}
+                    maxLength={7}
                   />
+                </TableCell>
+                   
+                <TableCell>
+                  <span id={'discount-'+d["subs"]["userId"]}>0</span>
                 </TableCell>
                 <TableCell>
                   <span id={d["subs"]["userId"]}>0</span>
@@ -195,8 +251,11 @@ const Prepaid = (props: any) => {
         </Table>
       </div>
       
-      <div className="border p-2 my-4">
-        <Calculated data={calculatedData}/>
+      <div className="border p-2 my-4 relative">
+        <div className={`cursor-pointer absolute bg-gray-200 opacity-80 inset-0 ${!isChanged && 'hidden'}`} onClick={calculate}>
+        </div>
+        <p onClick={calculate} className={`cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg tracking-tight ${!isChanged && 'hidden'} flex gap-1 items-center`}><BiRefresh className="text-2xl"/>Бодолт хийх</p>
+        <Calculated data={calculatedData} custId={props.custId} token={props.token}/>
       </div>
     </div>
   );

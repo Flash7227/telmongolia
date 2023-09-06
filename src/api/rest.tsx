@@ -407,3 +407,69 @@ export const bulkCalculate =  async (custId:string, data:object, token:string) =
         console.log('There was an error', err);
     }
 }
+export const newInvoicePrepaid =  async (custId:string, data:object, token:string) =>  {
+    const values = {
+        cust_id: custId,
+        data: data,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info/bulkrecharge/invoice";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const InvoiceHistory =  async (custId:string, token:string) =>  {
+    const values = {
+        cust_id: custId,
+        token: token,
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info/bulkrecharge/invoice/history";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+export const bulkPay =  async (custId:string, data:object, token:string, type:any) =>  {
+    const values = {
+        cust_id: custId,
+        data: data,
+        token: token,
+        type: type
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    let url = process.env.API + "/cust/info/bulkrecharge/payment";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
