@@ -26,6 +26,7 @@ const Prepaid = (props: any) => {
   const [calculatedData, setCalculatedData] = useState<calculatedType>();
   const [isChanged, setIsChanged] = useState(true);
   const [invoiceHistory, setInvoiceHistory] = useState(false);
+  const [beforeCalculation, setBeforeCalculation] = useState<any>([]);
   
   useEffect(()=>{
     if(calculatedData){
@@ -153,6 +154,7 @@ const Prepaid = (props: any) => {
     const finishedArr = Object.values(bulkArr);
     if(finishedArr.length > 0){
       const res = await bulkCalculate(props.custId, finishedArr, props.token);
+      setBeforeCalculation(finishedArr);
       setCalculatedData(res['data']['objects']);
       setIsChanged(false);
     }else{
@@ -255,7 +257,7 @@ const Prepaid = (props: any) => {
         <div className={`cursor-pointer absolute bg-gray-200 opacity-80 inset-0 ${!isChanged && 'hidden'}`} onClick={calculate}>
         </div>
         <p onClick={calculate} className={`cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg tracking-tight ${!isChanged && 'hidden'} flex gap-1 items-center`}><BiRefresh className="text-2xl"/>Бодолт хийх</p>
-        <Calculated data={calculatedData} custId={props.custId} token={props.token}/>
+        <Calculated data={calculatedData} custId={props.custId} token={props.token} beforeCalculation={beforeCalculation}/>
       </div>
     </div>
   );

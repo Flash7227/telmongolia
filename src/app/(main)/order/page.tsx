@@ -48,6 +48,8 @@ const formSchema = z.object({
   entrance: z.string(),
   door: z.string(),
   additional: z.string(),
+  cust_name: z.string(),
+  tax_id: z.string()
 });
 
 const Page = () => {
@@ -56,6 +58,7 @@ const Page = () => {
   const [addresses, setAddresses] = useState({});
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
+  const [customer_type, setCustomer_type] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -93,6 +96,8 @@ const Page = () => {
       entrance: "",
       door: "",
       additional: "",
+      cust_name: "",
+      tax_id: ""
     },
   });
   const handleFormChange = (e: any) => {
@@ -100,10 +105,11 @@ const Page = () => {
       setCity(e.target.value);
     } else if (e.target.name == "district") {
       setDistrict(e.target.value);
+    }else if(e.target.name == "cust_type"){
+      setCustomer_type(e.target.value);
     }
   };
   function handleLang(e: any) {
-    // console.log(e);
     if (e.key == "Backspace") {
       return;
     }
@@ -196,6 +202,7 @@ const Page = () => {
                       defaultValue={field.value}
                       className="flex flex-col space-y-1"
                       required
+                      name="cust_type"
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
@@ -225,6 +232,39 @@ const Page = () => {
                 </FormItem>
               )}
             />
+            {
+              (customer_type == 'GOV' || customer_type == 'BUS') &&
+              <>
+                           <FormField
+              control={form.control}
+              name="cust_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Байгууллагын нэр</FormLabel>
+                  <FormControl>
+                    <Input {...field} required={(customer_type == 'GOV' || customer_type == 'BUS') ? true : false} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+   
+             <FormField
+              control={form.control}
+              name="tax_id"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Байгууллагын ТТД /регистер/</FormLabel>
+                  <FormControl>
+                    <Input {...field} required={(customer_type == 'GOV' || customer_type == 'BUS') ? true : false} type="number"/>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+              </>
+            }
+
             <FormField
               control={form.control}
               name="mobile"

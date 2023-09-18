@@ -407,11 +407,12 @@ export const bulkCalculate =  async (custId:string, data:object, token:string) =
         console.log('There was an error', err);
     }
 }
-export const newInvoicePrepaid =  async (custId:string, data:object, token:string) =>  {
+export const newInvoicePrepaid =  async (custId:string, data:object, beforeCalculation:any, token:string) =>  {
     const values = {
         cust_id: custId,
         data: data,
         token: token,
+        beforeCalculation:beforeCalculation
       };
     const requestOptions = {
         method: "POST",

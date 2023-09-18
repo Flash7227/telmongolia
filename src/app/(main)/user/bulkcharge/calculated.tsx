@@ -60,7 +60,7 @@ const Calculated = (props: any) => {
     return total.toFixed(2);
   };
   const newInvoice = async () => {
-    const res = await newInvoicePrepaid(props.custId, props.data, props.token);
+    const res = await newInvoicePrepaid(props.custId, props.data, props.beforeCalculation, props.token);
     // console.log(res);
     toast({
       title: res['result'],
