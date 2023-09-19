@@ -21,10 +21,20 @@ const Shortcut = ({title, desc, icon, url}:{title:string, desc:string, icon:stri
             }
         }
     }
+    function onCardClose(){
+        setTimeout(() => { 
+            setCards(false) }, 
+        200);
+    }
+    function onModalClose(){
+        setTimeout(() => { 
+            setBill(false) }, 
+        200);
+    }
     return (
         <div onClick={handleClick} className="h-[166px] w-[176px] bg-transperant border border-brand-1/20 rounded-2xl p-2 hover:shadow-md hover:shadow-brand-2/50 cursor-pointer hover:-translate-y-2 transition-all duration-300 relative group flex items-center justify-center">
-            {cards && <Cards onCardClose={()=>setCards(false)}/>}
-            {bill && <CheckBill onModalClose={()=>setBill(false)}/>}
+            {cards && <Cards onCardClose={onCardClose} open={cards}/>}
+            {bill && <CheckBill onModalClose={onModalClose} open={bill}/>}
             <ul className="flex flex-col justify-center items-center gap-2 2xl:gap-4 tracking-tight">
                 <li className="relative h-20 w-20 border-b border-brand-1/20">
                     <Image src={"/assets/shortcuts/"+icon} fill alt={icon} className="p-4 object-contain"/>

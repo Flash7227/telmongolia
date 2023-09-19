@@ -82,7 +82,7 @@ const CheckBill = (props: any) => {
         <PayBill user_id={paymentId} onCardClose={()=>handleCardClose()}/>
       ) : (
         <Dialog open={open} onOpenChange={() => handleOpenChange()}>
-          <DialogContent className="sm:max-w-[525px]">
+          <DialogContent className="sm:max-w-[525px] max-h-[98%] overflow-y-scroll">
             {loading && <Loader />}
             <DialogHeader>
               <DialogTitle className="text-brand-1">Төлбөр</DialogTitle>

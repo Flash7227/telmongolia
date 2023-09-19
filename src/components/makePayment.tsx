@@ -44,7 +44,7 @@ const Payment = (props: any) => {
       onOpenChange={() => handleOpenChange()}
       defaultOpen={true}
     >
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[525px] max-h-[98%] overflow-y-scroll">
         {loading && <Loader />}
         <DialogHeader>
           <DialogTitle className="text-brand-1">Төлбөр төлөлт</DialogTitle>

@@ -24,13 +24,11 @@ import SelectedCard from "./selectedCard";
 const Cards = (props: any) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
   const [cards, setCards] = useState<any>({});
   const [cardType, setCardType] = useState("ALL");
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleOpenChange = () => {
-    setOpen(false);
     props.onCardClose(false);
   };
   function onCardChange(e: any) {
@@ -77,8 +75,8 @@ const Cards = (props: any) => {
           card={selectedCard}
         />
       ) : (
-        <Dialog open={open} onOpenChange={() => handleOpenChange()}>
-          <DialogContent className="sm:max-w-[525px]">
+        <Dialog open={props.open} onOpenChange={handleOpenChange}>
+          <DialogContent className="sm:max-w-[525px] max-h-[90%] overflow-y-scroll">
             {loading && <Loader />}
             <DialogHeader>
               <DialogTitle className="text-brand-1">Карт</DialogTitle>
