@@ -21,7 +21,7 @@ const  Page = async () => {
                 <div>
                     <Info userId={userdata.data.userId} token={userdata.jwt} custId={userdata.data.custId}/>
                     <div className="text-center mt-[40px]">
-                        {/* <a href="/user/bulkcharge" className="uppercase text-white bg-brand-1 px-6 py-2 rounded-md hover:bg-brand-2">Бөөнөөр цэнэглэх</a> */}
+                        <a href="/user/bulkcharge" className="uppercase text-white bg-brand-1 px-6 py-2 rounded-md hover:bg-brand-2">Бөөнөөр цэнэглэх</a>
                     </div>
                 </div>
                 <Usage userId={userdata.data.userId} token={userdata.jwt}/>
