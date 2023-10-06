@@ -1,5 +1,5 @@
 import Breadcrumb from "@/components/ui/breadcrumb";
-const breadcrumb = ["Хувьцаа эзэмшигчдэд", "2023 оны Хувьцаа эзэмшигчдийн ээлжит бус хурал"];
+const breadcrumb = ["Хувьцаа эзэмшигчдэд", "2023 оны Хувьцаа эзэмшигчдийн ээлжит бус хурал 2023.10.09"];
 
 const Page = () => {
     return (
