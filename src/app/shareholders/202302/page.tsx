@@ -26,7 +26,7 @@ const Page = () => {
 3. Төлөөлөн удирдах зөвлөлийн гишүүнийг сонгох тухай;
 </p>
 
-<p>Хурлын материалтай <a className="text-blue-500 cursor-pointer font-semibold" href="/assets/company/ShareholdersMeeting_material_20231009.pdf" target="_blank">энд дарж</a> танилцах боломжтой.</p>
+<p>Хурлын материалтай <a className="text-blue-500 cursor-pointer font-semibold" href="/assets/company/ShMeeting_material_web-20231009_final.pdf" target="_blank">энд дарж</a> танилцах боломжтой.</p>
 
 <div className="mt-4">
 Холбоо барих:<br/>
