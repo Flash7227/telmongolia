@@ -18,12 +18,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { BiDownload, BiQr } from "react-icons/bi";
 import Loader from "@/components/ui/loader";
-import { InvoiceDownload } from "@/api/rest";
-import { InvoicePay } from "@/api/rest";
+import Payment from "./payment";
 
 const History = (props: any) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [invoiceId, setInvoiceId] = useState();
 
   const handleClose = () => {
     props.onHistoryClose(false);
@@ -38,7 +38,8 @@ const History = (props: any) => {
     fetch();
   }, []);
   const findTotal = (d: string) => {
-    const temp = JSON.parse(d);
+    let temp = JSON.parse(d);
+    temp = temp['charge'];
     let total = 0;
     for (const key in temp) {
       total += temp[key]["vatAmt"];
@@ -46,52 +47,53 @@ const History = (props: any) => {
     }
     return total;
   };
-  const downloadInvoice = async (id:number) => {
-    setLoading(true);
-    const res = await InvoiceDownload(props.custId, id, props.token);
-    setLoading(true);
-    console.log(res);
+  const paymentType = async (id:any) => {
+    setInvoiceId(id);
   }
-  const payInvoice = async (id:number) => {
-    setLoading(true);
-    const res = await InvoicePay(props.custId, id, props.token);
-    setLoading(true);
-    console.log(res);
+  const onCardClose = () => {
+    setInvoiceId(undefined);
   }
   return (
     <Dialog open={props.open} onOpenChange={handleClose}>
       <DialogContent className="max-w-[600px] max-h-[440px] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>Нэхэмжлэхийн түүх</DialogTitle>
-            <div>
-              {loading && <Loader />}
-              <Table className="text-center">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[200px] text-center">
-                      Үүсгэсэн огноо
-                    </TableHead>
-                    <TableHead className="text-center">Дүн</TableHead>
-                    <TableHead className="text-center">Үйлдэл</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {data &&
-                    data.map((d: any, index: number) => (
-                      <TableRow key={index}>
-                        <TableCell>{d["cr_date"]}</TableCell>
-                        <TableCell>{findTotal(d["charge"])}₮</TableCell>
-                        <TableCell>
+            {
+              invoiceId ?
+              <Payment invoiceId={invoiceId} token={props.token} onCardClose={onCardClose}/>
+              :
+              <div>
+                {loading && <Loader />}
+                <Table className="text-center">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[200px] text-center">
+                        Үүсгэсэн огноо
+                      </TableHead>
+                      <TableHead className="text-center">Дүн</TableHead>
+                      <TableHead className="text-center">Үйлдэл</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {data &&
+                      data.map((d: any, index: number) => (
+                        <TableRow key={index}>
+                          <TableCell>{d["CR_DATE"]}</TableCell>
+                          <TableCell>{findTotal(d["CHARGE_DETAIL"])}₮</TableCell>
+                          <TableCell>
                             <div className="flex gap-2 justify-center">
-                                <Button className="flex gap-1 text-[14px]" onClick={()=>downloadInvoice(d["id"])}><BiDownload/> Татах</Button>
-                                <Button className="flex gap-1 text-[14px]" onClick={()=>payInvoice(d["id"])}><BiQr/>Төлөх</Button>
+                                {/* <Button className="flex gap-1 text-[14px]" onClick={()=>downloadInvoice(d["ID"])}><BiDownload/> Татах</Button> */}
+                                <a href={`${process.env.API}/ppd_invoice.php?id=${d['ID']}`} download={true} className="flex gap-1 text-[14px] bg-brand-1 items-center px-4 py-2 rounded-md text-white hover:bg-brand-1/80"><BiDownload/> Татах</a>
+                                <Button className="flex gap-1 text-[14px]" onClick={()=>paymentType(d["ID"])}><BiQr/>Төлөх</Button>
                             </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </div>
+            }
+
         </DialogHeader>
       </DialogContent>
     </Dialog>

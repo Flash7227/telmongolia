@@ -474,10 +474,10 @@ export const bulkPay =  async (custId:string, data:object, token:string, type:an
         console.log('There was an error', err);
     }
 }
-export const InvoiceDownload =  async (custId:string, invoiceId:number, token:string) =>  {
+
+export const InvoicePay =  async (data:any, token:string) =>  {
     const values = {
-        cust_id: custId,
-        invoice_id: invoiceId,
+        data: data,
         token: token,
       };
     const requestOptions = {
@@ -487,29 +487,8 @@ export const InvoiceDownload =  async (custId:string, invoiceId:number, token:st
         },
         body: JSON.stringify(values),
       };
-    let url = process.env.API + "/cust/info/bulkrecharge/invoice/download";
-    try{
-        const res = await fetch(url, requestOptions);
-        const data = await res.json();
-        return data;
-    }catch(err){
-        console.log('There was an error', err);
-    }
-}
-export const InvoicePay =  async (custId:string, invoiceId:number, token:string) =>  {
-    const values = {
-        cust_id: custId,
-        invoice_id: invoiceId,
-        token: token,
-      };
-    const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      };
-    let url = process.env.API + "/cust/info/bulkrecharge/invoice/pay";
+    // let url = process.env.API + "/cust/info/bulkrecharge/invoice/pay";
+    let url = process.env.API + "/cust/info/bulkrecharge/history/payment";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();

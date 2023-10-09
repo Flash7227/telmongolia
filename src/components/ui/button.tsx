@@ -18,6 +18,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        tvroom: "bg-pink-600 text-primary-foreground hover:bg-pink-600/90"
       },
       size: {
         default: "h-10 px-4 py-2",
