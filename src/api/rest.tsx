@@ -451,12 +451,13 @@ export const InvoiceHistory =  async (custId:string, token:string) =>  {
         console.log('There was an error', err);
     }
 }
-export const bulkPay =  async (custId:string, data:object, token:string, type:any) =>  {
+export const bulkPay =  async (custId:string, data:object, token:string, type:any, beforeCalculation:any) =>  {
     const values = {
         cust_id: custId,
         data: data,
         token: token,
-        type: type
+        type: type,
+        beforeCalculation: beforeCalculation
       };
     const requestOptions = {
         method: "POST",

@@ -53,7 +53,7 @@ const Payment = (props:any) => {
       async function onSubmit(values: z.infer<typeof formSchema>) {
         // console.log(values);
         setLoading(true);
-        const res = await bulkPay(props.custId, props.data, props.token, values);
+        const res = await bulkPay(props.custId, props.data, props.token, values, props.beforeCalculation);
         console.log(res);
         setLoading(false);
         if (res["result"] === "ok") {

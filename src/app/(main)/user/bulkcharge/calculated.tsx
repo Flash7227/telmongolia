@@ -71,7 +71,7 @@ const Calculated = (props: any) => {
 
   return (
     <div>
-      {isPaymentOpen && <Payment onCardClose={()=>setIsPaymentOpen(false)} custId={props.custId} token={props.token} data={props.data}/>}
+      {isPaymentOpen && <Payment onCardClose={()=>setIsPaymentOpen(false)} custId={props.custId} token={props.token} data={props.data} beforeCalculation={props.beforeCalculation}/>}
       <p>Төлбөр</p>
 
       <div className="flex justify-center gap-2 flex-wrap md:flex-nowrap">
