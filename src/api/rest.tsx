@@ -60,13 +60,14 @@ export function getCookie(){
     }
     return null;
 }
-export async function setInfo(obj:any, cust_id:number, type:string){
+export async function setInfo(obj:any, cust_id:number, type:string, token:any){
     Object.keys(obj).forEach(key => {
         if (key !== type) {
             delete obj[key];
         }
     });
     obj['cust_id'] = cust_id;
+    obj['token'] = token;
     const requestOptions = {
         method: "POST",
         headers: {
@@ -490,6 +491,30 @@ export const InvoicePay =  async (data:any, token:string) =>  {
       };
     // let url = process.env.API + "/cust/info/bulkrecharge/invoice/pay";
     let url = process.env.API + "/cust/info/bulkrecharge/history/payment";
+    try{
+        const res = await fetch(url, requestOptions);
+        const data = await res.json();
+        return data;
+    }catch(err){
+        console.log('There was an error', err);
+    }
+}
+
+export const verifyEbarimtApi =  async (ebarimt_id:any, cust_id:any ,token:string) =>  {
+    const values = {
+        ebarimt_id: ebarimt_id,
+        cust_id: cust_id,
+        token:token
+      };
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      };
+    // let url = process.env.API + "/cust/info/bulkrecharge/invoice/pay";
+    let url = process.env.API + "/cust/ebarimt/verify";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();

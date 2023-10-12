@@ -82,8 +82,10 @@ const Vas = ({userId, token}:{userId:string, token:string}) => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await getUserVas({userId, token});
-            const userVas = await reGroup(res['data']);
-            setVas(userVas);
+            if(res['result']!= 'error'){
+                const userVas = await reGroup(res['data']);
+                setVas(userVas);
+            }
         };
         fetchData();
       }, []);
@@ -104,9 +106,9 @@ const Vas = ({userId, token}:{userId:string, token:string}) => {
                 <tbody className="text-slate-800 text-[14px]">
                 {vas.length > 0 && vas.map((v:any, index:number)=>(
                     <tr key={index}>
-                        <td style={{paddingRight: 8}} className="p-2">#</td>
-                        <td className="p-2">{v['prodName']}</td>
-                        <td className="p-2">{v['monthlyFee']}</td>
+                        <td style={{paddingRight: 8}} className="p-2 w-8">#</td>
+                        <td className="py-2 min-w-[300px]">{v['prodName']}</td>
+                        <td className="py-2">{v['monthlyFee']}</td>
                     </tr>
                 ))}
                 </tbody>

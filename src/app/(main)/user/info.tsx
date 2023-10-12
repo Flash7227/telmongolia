@@ -10,13 +10,40 @@ import {
 import Image from "next/image";
 import EditInfo from "./editInfo";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { verifyEbarimtApi } from "@/api/rest";
+import { useToast } from "@/components/ui/use-toast"
 
-const Info = ({ userId, token, custId }: { userId: string, token: string, custId:string}) => {
+const Info = ({
+  userId,
+  token,
+  custId,
+}: {
+  userId: string;
+  token: string;
+  custId: string;
+}) => {
   const [userInfo, setUserInfo] = useState();
-  const [chargeOpen, setChargeOpen] = useState('');
+  const [chargeOpen, setChargeOpen] = useState("");
+  const [verifyOpen, setVerifyOpen] = useState(false);
+  const { toast } = useToast()
+
   const getData = async () => {
     const temp = await getUserInfo({ userId, token });
-    setUserInfo(temp);
+    if (temp["result"] != "error") {
+      setUserInfo(temp);
+    }
   };
   useEffect(() => {
     getData();
@@ -25,8 +52,21 @@ const Info = ({ userId, token, custId }: { userId: string, token: string, custId
   const handleEdit = async () => {
     getData();
   };
-  const openBulkCharge = () =>{
+  const openBulkCharge = () => {
     setChargeOpen(custId);
+  };
+  async function verifyEbarimt(ebarimt_id:any, cust_id:number){
+    const res = await verifyEbarimtApi(ebarimt_id, cust_id, token);
+    if(res){
+      toast({
+        title: res['result'],
+        description: res['message'],
+      })
+      if(res['result'] == 'ok'){
+        setVerifyOpen(false);
+        getData();
+      }
+    }
   }
   return (
     <div className="border border-slate-50 p-2 rounded-2xl shadow-sm shadow-brand-1/30 w-[400px]">
@@ -61,6 +101,7 @@ const Info = ({ userId, token, custId }: { userId: string, token: string, custId
                     custId={userInfo["data"]["cust_id"]}
                     onEdit={handleEdit}
                     oldvalue={userInfo["data"]["number"]}
+                    token={token}
                   />
                 </td>
               </tr>
@@ -75,6 +116,7 @@ const Info = ({ userId, token, custId }: { userId: string, token: string, custId
                     custId={userInfo["data"]["cust_id"]}
                     onEdit={handleEdit}
                     oldvalue={userInfo["data"]["email"]}
+                    token={token}
                   />
                 </td>
               </tr>
@@ -85,7 +127,10 @@ const Info = ({ userId, token, custId }: { userId: string, token: string, custId
                 <td>{userInfo["data"]["address"]}</td>
                 <td></td>
               </tr>
-              <tr>
+              {/* {
+                userInfo["data"]["custType"] == 'PSN'
+                &&
+                <tr>
                 <td className="relative h-5 w-5">
                   <Image
                     src="/assets/images/ebarimt.svg"
@@ -108,12 +153,68 @@ const Info = ({ userId, token, custId }: { userId: string, token: string, custId
                   />
                 </td>
               </tr>
+              } */}
+              {userInfo["data"]["custType"] == "PSN" && (
+                <tr>
+                  <td className="relative h-5 w-5">
+                    <Image
+                      src="/assets/images/ebarimt.svg"
+                      fill
+                      alt="ebarimt"
+                      className="p-1 object-cover"
+                    />
+                  </td>
+                  <td className="py-4">
+                    {userInfo["data"]["ebarimtId_check"] == 0 &&
+                      userInfo["data"]["ebarimt_id"] != null && (
+                        <div>
+                          <div className="px-2">
+                            {userInfo["data"]["ebarimt_id"]}
+                          </div>
+                          <div onClick={()=>setVerifyOpen(true)} className="bg-yellow-400 rounded-sm px-2 text-slate-900 cursor-pointer hover:bg-yellow-400/90 hover:text-white">Баталгаажуулах</div>
+                        </div>
+                      )}
+                      {
+                        userInfo["data"]["ebarimtId_check"] == 1 &&
+                        userInfo["data"]["ebarimt_id"] != null && (
+                          <div className="px-2">{userInfo["data"]["ebarimt_id"]}</div>
+                        )
+                      }
+                  </td>
+                  <td>
+                    {
+                      userInfo["data"]["ebarimtId_check"] == 1
+                      &&
+                      <EditInfo
+                        type="ebarimt"
+                        custId={userInfo["data"]["cust_id"]}
+                        onEdit={handleEdit}
+                        oldvalue={userInfo["data"]["ebarimt_id"] !== null ? userInfo["data"]["ebarimt_id"] : ""}
+                        token={token}
+                      />
+                    }
+                </td>
+                </tr>
+              )}
             </tbody>
           </table>
+          <AlertDialog open={verifyOpen} onOpenChange={()=>setVerifyOpen(false)}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Баталгаажуулах уу?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Та уг ebarimt дугаарыг өөрийн ebarimt хялбар бүртгэл дээр баталгаажуулах гэж байна.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Болих</AlertDialogCancel>
+          <Button onClick={()=>verifyEbarimt(userInfo["data"]["ebarimt_id"], userInfo["data"]["cust_id"])}>Баталгаажуулах</Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
         </div>
       )}
     </div>
   );
 };
-
 export default Info;

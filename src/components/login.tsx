@@ -82,7 +82,8 @@ const Login = () => {
       });
       setAuth(res);
       // setTimeout(()=>router.push("/user"), 400);
-      router.push("/user");
+      // router.push("/user");
+      location.href = "/user";
     } else if (res["message"].includes("Нэг удаа")) {
       setOnetime(true);
     }
@@ -91,7 +92,8 @@ const Login = () => {
     const cookies = new Cookies();
     cookies.remove("user");
     setAuth(undefined);
-    router.push("/");
+    // router.push("/");
+    location.href="/";
   }
   function handleOpenOnetimeChange(d: boolean) {
     setOnetime(false);

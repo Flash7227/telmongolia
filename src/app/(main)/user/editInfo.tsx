@@ -25,7 +25,7 @@ import { useState, useEffect } from "react";
 import { BiEditAlt } from "react-icons/bi";
 import { setInfo } from "@/api/rest";
 
-const EditInfo = ({ type, custId, onEdit, oldvalue}: { type: string, custId: number, onEdit:any, oldvalue:any}) => {
+const EditInfo = ({ type, custId, onEdit, oldvalue, token}: { type: string, custId: number, onEdit:any, oldvalue:any, token:any}) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ const EditInfo = ({ type, custId, onEdit, oldvalue}: { type: string, custId: num
   const formSchema = z.object({
     email: z.string(),
     mobile: z.string(),
-    ebarimt: z.string()
+    ebarimt: z.string(),
   });
   if(type === 'mobile'){
     // oldvalue = parseInt(oldvalue);
@@ -44,13 +44,13 @@ const EditInfo = ({ type, custId, onEdit, oldvalue}: { type: string, custId: num
     defaultValues: {
       email: oldvalue,
       mobile: oldvalue,
-      ebarimt: ''
+      ebarimt: oldvalue
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    const res = await setInfo(values, custId, type);
+    const res = await setInfo(values, custId, type, token);
     setLoading(false);
     toast({
       title: "Result",

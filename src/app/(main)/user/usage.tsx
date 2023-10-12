@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getUserUsage } from "@/api/rest";
 import { BiCoinStack, BiTime, BiFlag, BiCalendarEvent } from "react-icons/bi";
+import Cookies from "universal-cookie";
 
 function remainingMinute(obj: []) {
   for (var data of Object.values(obj)) {
@@ -39,12 +40,21 @@ function formatDate(d: any) {
   var temp = new Date(d).toLocaleDateString();
   return temp;
 }
+function logOut(){
+  const cookies = new Cookies();
+  cookies.remove("user");
+  location.href = "/";
+}
 const Usage = ({ userId, token }: { userId: string; token: string }) => {
   const [usage, setUsage] = useState();
   useEffect(() => {
       const fetchData = async () => {
           const res = await getUserUsage({ userId, token });
-          setUsage(res);
+          if(res['result'] != 'error'){
+            setUsage(res);
+          }else{
+            logOut();
+          }
       };
       fetchData();
     }, []);
@@ -105,10 +115,11 @@ const Card = ({
       <li className="text-3xl group-hover:-translate-y-1 transition-transform">
         {icon}
       </li>
-      <li className="text-brand-3 font-semibold text-[14px] mt-2">{title}</li>
-      <li className="font-bold text-xl">{value}</li>
+      <li className={`text-brand-3 font-semibold text-[14px] mt-2`}>{title}</li>
+      <li className={`font-bold text-center ${value.length > 10 ? 'text-[12px]' : 'text-xl'}`}>{value}</li>
     </ul>
   </div>
 );
+
 
 export default Usage;
