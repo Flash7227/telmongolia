@@ -176,7 +176,7 @@ const FormData = () => {
   
                 <a
                   href="https://tvroom.mn"
-                  className="flex gap-1 items-center tracking-tight text-pink-600 border border-pink-600 hover:bg-pink-600 hover:text-white h-10 px-4 py-2 rounded-md ing-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
+                  className="flex gap-1 items-center tracking-tight text-brand-2 border border-brand-1 hover:text-white h-10 px-4 py-2 rounded-md ing-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
                 >
                   <AiOutlineArrowLeft size={14} />
                   Буцах

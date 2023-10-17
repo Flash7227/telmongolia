@@ -5,6 +5,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/components/ui/alert-dialog"
+
 import { useState, useEffect } from "react";
 import { InvoiceHistory } from "@/api/rest";
 import {
@@ -16,26 +27,30 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { BiDownload, BiQr } from "react-icons/bi";
+import { BiDownload, BiQr, BiTrash } from "react-icons/bi";
 import Loader from "@/components/ui/loader";
 import Payment from "./payment";
+import { removeInvoiceApi } from "@/api/rest";
+import { useToast } from "@/components/ui/use-toast"
 
 const History = (props: any) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [invoiceId, setInvoiceId] = useState();
+  const [invoiceRemove, setInvoiceRemove] = useState();
+  const { toast } = useToast()
 
   const handleClose = () => {
     props.onHistoryClose(false);
   };
-  const fetch = async () => {
+  const fetchData = async () => {
     setLoading(true);
     const res = await InvoiceHistory(props.custId, props.token);
     setLoading(false);
     setData(res["data"]);
   };
   useEffect(() => {
-    fetch();
+    fetchData();
   }, []);
   const findTotal = (d: string) => {
     let temp = JSON.parse(d);
@@ -53,9 +68,24 @@ const History = (props: any) => {
   const onCardClose = () => {
     setInvoiceId(undefined);
   }
+  const invoiceDelete = async () => {
+    setLoading(true);
+    const res = await removeInvoiceApi(invoiceRemove, props.custId, props.token);
+    setLoading(false);
+    if(res){
+      toast({
+        title: res['result'],
+        description: res['message'],
+      })
+      if(res['result'] == 'ok'){
+        setInvoiceRemove(undefined);
+        fetchData();
+      }
+    }
+  }
   return (
     <Dialog open={props.open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-[600px] max-h-[440px] overflow-y-scroll">
+      <DialogContent className="max-w-[800px] max-h-[440px] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>Нэхэмжлэхийн түүх</DialogTitle>
             {
@@ -83,8 +113,9 @@ const History = (props: any) => {
                           <TableCell>
                             <div className="flex gap-2 justify-center">
                                 {/* <Button className="flex gap-1 text-[14px]" onClick={()=>downloadInvoice(d["ID"])}><BiDownload/> Татах</Button> */}
+                                <Button className="flex gap-1 text-[14px] border-red-400 text-red-400 hover:text-white hover:bg-red-400" size="sm" onClick={()=>setInvoiceRemove(d["ID"])} variant={"outline"}><BiTrash/>Устгах</Button>
                                 <a href={`${process.env.API}/ppd_invoice.php?id=${d['ID']}`} download={true} className="flex gap-1 text-[14px] bg-brand-1 items-center px-4 py-2 rounded-md text-white hover:bg-brand-1/80"><BiDownload/> Татах</a>
-                                <Button className="flex gap-1 text-[14px]" onClick={()=>paymentType(d["ID"])}><BiQr/>Төлөх</Button>
+                                <Button className="flex gap-1 text-[14px]" size="sm" onClick={()=>paymentType(d["ID"])}><BiQr/>Төлөх</Button>
                             </div>
                           </TableCell>
                         </TableRow>
@@ -95,6 +126,20 @@ const History = (props: any) => {
             }
 
         </DialogHeader>
+            <AlertDialog open={invoiceRemove ? true : false} onOpenChange={()=>setInvoiceRemove(undefined)}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Та итгэлтэй байна уу?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Та уг нэхэмжлэхийг устгах гэж байна.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Болих</AlertDialogCancel>
+              <Button onClick={invoiceDelete}>Устгах</Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </DialogContent>
     </Dialog>
   );
