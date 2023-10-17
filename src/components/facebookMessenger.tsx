@@ -1,9 +1,12 @@
 "use client"
 import React, { Component} from 'react';
 import { FacebookProvider, CustomChat } from 'react-facebook';
+import { usePathname } from 'next/navigation'
 
 const FacebookMessenger = () => {
+  const pathname = usePathname()
     return (
+      (pathname != '/tvroom/register' && pathname != '/tvroom/passwordreset') &&
         <FacebookProvider appId="1844353725960841" chatSupport>
         <CustomChat pageId="335143273544144" minimized={true}/>
       </FacebookProvider>  
