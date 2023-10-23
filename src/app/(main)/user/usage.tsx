@@ -18,6 +18,7 @@ function remainingUnit(obj: []) {
       return data["cntValue"];
     }
   }
+  return 0;
 }
 function stateToWord(d: number) {
   if (d === 1 || d === 11) {
@@ -69,8 +70,8 @@ const Usage = ({ userId, token }: { userId: string; token: string }) => {
             title="Нэгж"
             icon={<BiCoinStack />}
           />
-          {usage['data']["subs"]["subs"]["svcDomain"] === 5 ||
-          usage['data']["subs"]["subs"]["svcDomain"] === 1 ? (
+          {(usage['data']["subs"]["subs"]["svcDomain"] === 5 ||
+          usage['data']["subs"]["subs"]["svcDomain"] === 1) ? (
             <Card
               value={remainingMinute(usage['data']['counter'])}
               title="Үлдсэн минут"
@@ -116,7 +117,7 @@ const Card = ({
         {icon}
       </li>
       <li className={`text-brand-3 font-semibold text-[14px] mt-2`}>{title}</li>
-      <li className={`font-bold text-center ${value.length > 10 ? 'text-[12px]' : 'text-xl'}`}>{value}</li>
+      <li className={`font-bold text-center ${value && (value.length > 10 ? 'text-[12px]' : 'text-xl')}`}>{value}</li>
     </ul>
   </div>
 );

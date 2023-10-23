@@ -4,7 +4,7 @@ import { getBulkList } from '@/api/rest';
 import { useState, useEffect } from 'react';
 import Loader from "@/components/ui/loader";
 import Typeselecter from './typeselecter';
-import Postpaid from './postpaid';
+import Postpaid from './postpaid/postpaid';
 import Prepaid from './prepaid';
 import Breadcrumb from "@/components/ui/breadcrumb";
 
@@ -65,7 +65,7 @@ const Page = () => {
               selected === 'prepaid' ?
               <Prepaid data={products} custId={userData['data']['custId']} token={userData['jwt']}/>
               :selected === 'postpaid' &&
-              <Postpaid data={products}/>
+              <Postpaid data={products} custId={userData['data']['custId']} token={userData['jwt']}/>
             }
         </div>
         :
