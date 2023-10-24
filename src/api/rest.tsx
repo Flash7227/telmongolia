@@ -43,7 +43,7 @@ export async function onetime({user_id, onetime, password}:{user_id:string, onet
         },
         body: JSON.stringify(values),
       };
-    let url = process.env.API2 + "/login/onetime";
+    let url = process.env.API + "/login/onetime";
     try{
         const res = await fetch(url, requestOptions);
         const data = await res.json();
