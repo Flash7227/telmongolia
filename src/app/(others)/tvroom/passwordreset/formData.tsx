@@ -21,7 +21,7 @@ import { CgSpinner } from "react-icons/cg";
 import ReturnPage from "./returnPage";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  username: z.string(),
   password: z.string(),
   verificationcode: z.string().optional(),
 });
@@ -35,7 +35,7 @@ const FormData = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
       verificationcode: "",
     },
@@ -91,20 +91,20 @@ const FormData = () => {
             >
               <FormField
                 control={form.control}
-                name="email"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-white">Нэвтрэх нэр</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder=""
+                        // placeholder="Имайл хаяг эсвэл утасны дугаар"
                         {...field}
-                        type="email"
+                        type="string"
                         required
                         disabled={isLoading}
                       />
                     </FormControl>
-                    <FormDescription>Таны бүртгүүлсэн нэвтрэх нэр /email/</FormDescription>
+                    {/* <FormDescription>Таны бүртгүүлсэн нэвтрэх нэр</FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -149,7 +149,7 @@ const FormData = () => {
                         />
                       </FormControl>
                       <FormDescription>
-                        Имэйл хаяг руу илгээгдэнэ.
+                        Нэвтрэх хаяг руу илгээгдсэн
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

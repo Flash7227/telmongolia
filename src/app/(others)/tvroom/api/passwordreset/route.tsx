@@ -3,17 +3,17 @@ import excuteQuery from "@/lib/db";
 
 export async function POST(request: Request) {
   const req = await request.json();
-  let query = `select * from verification where email = '${req.email}' and verified = 0 order by created_at desc limit 1`;
+  let query = `select * from verification where email = '${req.username}' and verified = 0 order by created_at desc limit 1`;
   const verify = await excuteQuery({
     query: query,
   });
   if (verify.length > 0) {
     if (verify[0]["code"] == req.verificationcode) {
       //create user
-      const user_update = await update_user(req.email, req.password);
+      const user_update = await update_user(req.username, req.password);
 
       if (user_update?.includes("success")) {
-        query = `update verification set verified = 1, verified_at = TIMESTAMP(CURRENT_TIMESTAMP) where email = '${req.email}' and verified = 0 and code = ${req.verificationcode}`;
+        query = `update verification set verified = 1, verified_at = TIMESTAMP(CURRENT_TIMESTAMP) where email = '${req.username}' and verified = 0 and code = ${req.verificationcode}`;
         const verified = await excuteQuery({
           query: query,
         });

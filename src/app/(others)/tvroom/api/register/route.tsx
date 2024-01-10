@@ -3,17 +3,17 @@ import excuteQuery from "@/lib/db";
 
 export async function POST(request: Request) {
   const req = await request.json();
-  let query = `select * from verification where email = '${req.email}' and verified = 0 order by created_at desc limit 1`;
+  let query = `select * from verification where email = '${req.username}' and verified = 0 order by created_at desc limit 1`;
   const verify = await excuteQuery({
     query: query,
   });
   if (verify.length > 0) {
     if (verify[0]["code"] == req.verificationcode) {
       //create user
-      const user_create = await create_user(req.email, req.password);
+      const user_create = await create_user(req.username, req.password);
 
       if (user_create?.includes("success")) {
-        query = `update verification set verified = 1, verified_at = TIMESTAMP(CURRENT_TIMESTAMP) where email = '${req.email}' and verified = 0 and code = ${req.verificationcode}`;
+        query = `update verification set verified = 1, verified_at = TIMESTAMP(CURRENT_TIMESTAMP) where email = '${req.username}' and verified = 0 and code = ${req.verificationcode}`;
         const verified = await excuteQuery({
           query: query,
         });
@@ -71,7 +71,7 @@ async function create_user(username: string, password: string) {
   const data = {
     password: password,
     bundle_type: 362,
-    email: username,
+    email: validateEmail(username) ? username : 'test@mtcone.net',
     username: username,
   };
   const requestOptions = {
@@ -91,6 +91,10 @@ async function create_user(username: string, password: string) {
     console.log("There was an error", err);
     return 'Try catch error!';
   }
+}
+function validateEmail(email: any) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
 }
 //async function checkUser(user: any) {
     //   const token = getToken();
