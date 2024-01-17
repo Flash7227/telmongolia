@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 }
 
 async function getToken() {
-  const url = "https://tvroom.mn/api/customer/token";
+  const url = "https://ms.tvroom.mn/customer/token";
   const data = { username: "admin", password: "90b2c4d0" };
 
   const requestOptions = {
@@ -67,7 +67,7 @@ async function getToken() {
 }
 async function create_user(username: string, password: string) {
   const token = await getToken();
-  const url = "https://tvroom.mn/api/customer/create";
+  const url = "https://ms.tvroom.mn/customer/create";
   const data = {
     password: password,
     bundle_type: 362,
@@ -98,7 +98,7 @@ function validateEmail(email: any) {
 }
 //async function checkUser(user: any) {
     //   const token = getToken();
-    //   const url = `https://tvroom.mn/api/customer/list?username=${user}`;
+    //   const url = `https://ms.tvroom.mn/customer/list?username=${user}`;
     //   try {
     //     const res = await fetch(url, {
     //       headers: { Authentication: `Bearer ${token}` },

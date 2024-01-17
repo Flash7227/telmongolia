@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 }
 
 async function getToken() {
-  const url = "https://tvroom.mn/api/customer/token";
+  const url = "https://ms.tvroom.mn/customer/token";
   const data = { username: "admin", password: "90b2c4d0" };
 
   const requestOptions = {
@@ -67,7 +67,7 @@ async function getToken() {
 }
 async function update_user(username: string, password: string) {
   const userlist = await checkUser(username);
-  const url = "https://tvroom.mn/api/customer/modify";
+  const url = "https://ms.tvroom.mn/customer/modify";
   const data = {
     password: `${password}`,
     user_id: userlist[0]['response']['0']['user_id']
@@ -92,7 +92,7 @@ async function update_user(username: string, password: string) {
 }
 async function checkUser(user: any) {
       const token = await getToken();
-      const url = `https://tvroom.mn/api/customer/list?username=${user}`;
+      const url = `https://ms.tvroom.mn/customer/list?username=${user}`;
       const requestOptions = {
         method: "GET",
         headers: {
