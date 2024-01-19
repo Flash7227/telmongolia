@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { CgSpinner } from "react-icons/cg";
 import ReturnPage from "./returnPage";
@@ -28,6 +28,7 @@ const formSchema = z.object({
 
 const FormData = () => {
     const [isCodeSent, setIsCodeSent] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isProcessOver, setIsProcessOver] = useState(false);
   const { toast } = useToast();
@@ -79,6 +80,12 @@ const FormData = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+  useEffect(()=>{
+    const mobile = () => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if(mobile()){
+      setIsMobile(true);
+    }
+  },[])
     return (
         <>
         {isProcessOver ? (
@@ -175,7 +182,7 @@ const FormData = () => {
                 )}
   
                 <a
-                  href="https://tvroom.mn"
+                  href={isMobile ? "https://ms.tvroom.mn/web/close" : "https://tvroom.mn"} 
                   className="flex gap-1 items-center tracking-tight text-brand-2 border border-brand-1 hover:text-white h-10 px-4 py-2 rounded-md ing-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
                 >
                   <AiOutlineArrowLeft size={14} />
