@@ -9,7 +9,7 @@ const HomeAlert = () => {
           // const res = await getEachNews(53, "news");
         //   alert(res['title']);
           toast({
-            title: `2024 оны хувьцаа эзэмшигчдийн хурал хуралдуулах тухай`,
+            title: `2024 оны хувьцаа эзэмшигчдийн хурал`,
             description: <a href={`/shareholders`}>Дэлгэрэнгүй</a>,
           })
         };
