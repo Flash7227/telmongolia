@@ -6,11 +6,11 @@ const HomeAlert = () => {
     const { toast } = useToast()
     useEffect(() => {
         const fetchData = async () => {
-          const res = await getEachNews(53, "news");
+          // const res = await getEachNews(53, "news");
         //   alert(res['title']);
           toast({
-            title: res['title'],
-            description: <a href={`/news/${res['id']}`}>Дэлгэрэнгүй</a>,
+            title: `2024 оны хувьцаа эзэмшигчдийн хурал хуралдуулах тухай`,
+            description: <a href={`/shareholders`}>Дэлгэрэнгүй</a>,
           })
         };
         const news = fetchData();

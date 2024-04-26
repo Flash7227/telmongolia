@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { AiFillFolderOpen } from "react-icons/ai";
 
 const breadcrumb = ["Хувьцаа эзэмшигчдийн хурал"];
 
@@ -13,23 +14,23 @@ const Page = () => {
     <div>
       <Breadcrumb data={breadcrumb} />
       <div>
-        <div className="border py-4 px-8 rounded-md">
-          <h5 className="font-semibold text-lg text-brand-2 my-2">Хурлын тов:</h5>
-          <ul className="list-disc">
+        <div className="border p-4 rounded-md text-[14px]">
+          <h5 className="font-semibold text-brand-2 my-2">Хурлын тов:</h5>
+          <ul className="list-disc [&>*]:ml-8">
             <li>
               2024 оны 4 дүгээр сарын 30-ны өдрийн 11:00 цагт Мэдээлэл холбооны
               сүлжээ ТӨХХК-ийн хурлын зааланд хуралдана.
             </li>
           </ul>
-          <h5 className="font-semibold  text-lg text-brand-2 my-2">
+          <h5 className="font-semibold text-brand-2 my-2">
             Хуралд оролцох эрхтэй хувьцаа эзэмшигчдийг бүртгэх өдөр:
           </h5>
-          <ul className="list-disc">
+          <ul className="list-disc [&>*]:ml-8">
             <li>2024 оны 4 дүгээр сарын 09</li>
           </ul>
-          <a target="_blank" href="/assets/company/2024_shm_material.pdf" className="font-semibold underline text-lg text-brand-2 my-2">Хурлын материал</a>
-          <h5 className="font-semibold  text-lg text-brand-2 my-2">Хэлэлцэх асуудал</h5>
-          <ul className="list-disc">
+          <a target="_blank" href="/assets/company/2024_shm_material.pdf" className="font-semibold underline text-brand-2 my-2 flex items-center"><AiFillFolderOpen />Хурлын материал үзэх</a>
+          <h5 className="font-semibold text-brand-2 my-2">Хэлэлцэх асуудал</h5>
+          <ul className="list-disc [&>*]:ml-8">
             <li>
               Компанийн 2023 оны үйл ажиллагааны болон санхүүгийн тайланг
               танилцуулах, тайлангийн талаарх Төлөөлөн удирдах зөвлөлийн
