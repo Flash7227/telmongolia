@@ -21,6 +21,8 @@ const Page = () => {
       window.location.href = "/products/catv";
     } else if (num === 12) {
       window.location.href = "/assets/help/Stats-Handbook-for MTC.pdf";
+    } else if (num === 13) {
+      window.location.href = "/assets/help/olonulstrarrif.pdf";
     } else {
       setHelp(num);
       setIsOpen(true);
@@ -84,6 +86,9 @@ const Page = () => {
           </TableRow>
           <TableRow className="cursor-pointer" onClick={() => openModal(12)}>
             <TableCell>Callcenter заавар</TableCell>
+          </TableRow>
+          <TableRow className="cursor-pointer" onClick={() => openModal(13)}>
+            <TableCell>Олон улсын ярианы үйлчилгээний тариф</TableCell>
           </TableRow>
         </TableBody>
       </Table>
