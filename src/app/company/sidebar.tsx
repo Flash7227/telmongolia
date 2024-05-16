@@ -20,6 +20,7 @@ const Sidebar = () => {
                     <BiSlideshow/> Ил тод байдал
                 </li>
                 <ul className="ml-8 text-[14px] text-slate-900 flex flex-col space-y-4 font-normal">
+                        <Link href="/company/public/company">Компанийн засаглалын тайлан</Link>
                         <Link href="/company/public/yearly">Жилийн тайлан</Link>
                         <Link href="/company/public/seasonly">Улирлын тайлан</Link>
                         <Link href="/company/public/audited">Аудитлагдсан тайлан</Link>
