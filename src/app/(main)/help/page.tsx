@@ -23,7 +23,11 @@ const Page = () => {
       window.location.href = "/assets/help/Stats-Handbook-for MTC.pdf";
     } else if (num === 13) {
       window.location.href = "/assets/help/olonulstrarrif.pdf";
-    } else {
+    } else if (num === 14) {
+      window.location.href = "/assets/help/SKM_C250i24052711231.pdf";
+    } else if (num === 15) {
+      window.location.href = "/assets/help/Монголын цахилгаан холбоо ХК RIO.pdf";
+    }else {
       setHelp(num);
       setIsOpen(true);
     }
@@ -89,6 +93,12 @@ const Page = () => {
           </TableRow>
           <TableRow className="cursor-pointer" onClick={() => openModal(13)}>
             <TableCell>Олон улсын ярианы үйлчилгээний тариф</TableCell>
+          </TableRow>
+          <TableRow className="cursor-pointer" onClick={() => openModal(14)}>
+            <TableCell>Олон суваг дамжуулах үйлчилгээний холболтын гэрээ</TableCell>
+          </TableRow>
+          <TableRow className="cursor-pointer" onClick={() => openModal(15)}>
+            <TableCell>Сүлжээ хоорондын харилцан холболтын гэрээ</TableCell>
           </TableRow>
         </TableBody>
       </Table>
