@@ -4,7 +4,7 @@ import PdfTable from "../../pdfTable";
 const breadcrumb = ["Ил тод байдал", "Компанийн засаглалын тайлан"];
 const duties = [
     ['Компанийн засаглалын тайлан 20240515', 'iltodbaidal/MTC2023-КЗ_ТАЙЛАН.PDF'],
-    ['ЭБАТ-ны цалин хөлс', 'iltodbaidal/ЭБАТ-ны цалин хөлс.pdf']    
+    ['ЭБАТ-ны цалин хөлс', 'iltodbaidal/ЭБАТ-ны цалин хөлс (2021-2023).pdf']    
 ];
 const Page = () => {
     return (
