@@ -3,6 +3,7 @@ import PdfTable from "../../pdfTable";
 
 const breadcrumb = ["Ил тод байдал", "Санхүүгийн тайлан"];
 const duties = [
+    ['2024 оны 2-р улирлын тайлан', '/iltodbaidal/2024uliral.pdf'],
     ['2023 оны 4-р улирлын тайлан', '/iltodbaidal/20920234report.pdf'],
     ['2022 оны 2-р улирлын тайлан', 'https://mse.mn/uploads/finance/20920222report.pdf'],
     ['2021 оны 4-р улирлын тайлан', 'https://mse.mn/uploads/finance/20920214report.pdf'],
