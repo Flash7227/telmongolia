@@ -164,7 +164,7 @@ const Navbar = () => {
                     </li>
                     <Link href="/bonus" className="hover:text-brand-2">Урамшуулал</Link>
                     <Link href="/news" className="hover:text-brand-2">Мэдээлэл</Link>
-                    <Link href="/help" className="hover:text-brand-2">Тусламж.</Link>
+                    <Link href="/help" className="hover:text-brand-2">Тусламж</Link>
                     <Login />
                   </ul>
                 </div>
