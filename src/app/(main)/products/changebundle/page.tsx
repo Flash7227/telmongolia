@@ -14,7 +14,7 @@ export default function ChangeBundle() {
         <Price
           title="Багц 1"
           price={"9,900₮"}
-          alert="2025 оны 1 сарын 1-нээс мөрдөгдөнө "
+          alert="2025 оны 01 сарын 01-нээс мөрдөнө "
           list={[
             "Анхны холболтын хураамж",
             "Улаанбаатарт 33,000₮" ,
@@ -27,7 +27,7 @@ export default function ChangeBundle() {
         <Price
           title="Багц 2"
           price={"16,500₮"}
-          alert="2025 оны 1 сарын 1-нээс мөрдөгдөнө "
+          alert="2025 оны 01 сарын 01-нээс мөрдөнө "
           list={[
             "Анхны холболтын хураамж",
             "Улаанбаатарт 33,000₮" ,
@@ -45,7 +45,7 @@ export default function ChangeBundle() {
         <Price
           title="Багц 1"
           price={"16,500₮"}
-          alert="2025 оны 1 сарын 1-нээс мөрдөгдөнө "
+          alert="2025 оны 01 сарын 01-нээс мөрдөнө "
           list={[
            "Анхны холболтын хураамж",
             "Улаанбаатарт 33,000₮" ,
@@ -68,8 +68,8 @@ export default function ChangeBundle() {
           ]}
         />
         <Price
-          title="Багц 2"
-          price={"42,000₮"}
+          title="Багц 3"
+          price={"49,500₮"}
           list={[
            "Анхны холболтын хураамж",
             "Улаанбаатарт 33,000₮" ,
