@@ -115,6 +115,7 @@ const Navbar = () => {
             <button
               className="text-slate-50 text-xl"
               onClick={() => handleOpen()}
+              title="menu open"
             >
               <AiOutlineMenu />
             </button>
@@ -134,6 +135,7 @@ const Navbar = () => {
                     <button
                       className="text-slate-50 text-2xl"
                       onClick={() => handleClose()}
+                      title="menu close"
                     >
                       <AiOutlineClose />
                     </button>

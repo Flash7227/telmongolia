@@ -22,7 +22,7 @@ const Page = () => {
     } else if (num === 12) {
       window.location.href = "/assets/help/Stats-Handbook-for MTC.pdf";
     } else if (num === 13) {
-      window.location.href = "/assets/help/olonulstrarrif.pdf";
+      window.location.href = "/assets/help/a133tushaaltarif.pdf";
     } else if (num === 14) {
       window.location.href = "/assets/help/SKM_C250i24052711231.pdf";
     } else if (num === 15) {
